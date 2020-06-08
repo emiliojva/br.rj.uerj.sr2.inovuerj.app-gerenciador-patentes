@@ -20,15 +20,9 @@ data_term date, #data de termino automatico, pode ser omitida caso seja por exec
 #/campo 4
 
 #campo 5
-obj varchar(1000),
+objetivo varchar(1000),
 #/campo 5
 
-#autenticação
-login varchar(64) not null,
-senha varchar(256) not null,
-#/autenticação
-
-cpf int(11) not null, #cpf para busca
 
 #campo 7
 estado int(1) not null, #cada estado tera um numero para identificação
