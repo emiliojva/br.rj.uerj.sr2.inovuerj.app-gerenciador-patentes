@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\":"App/"
+    }
+  },
+  "require": {
+    "monolog/monolog": "1.*",
+    "league/plates": "3.3.*"
+  }
+}
