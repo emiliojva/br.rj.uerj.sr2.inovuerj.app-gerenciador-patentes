@@ -1,0 +1,713 @@
+.header-texto{
+    text-align: center;
+    background-color: #8b0000;
+    width: auto;
+}
+.header-texto h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    padding-top: 65px;
+    padding-bottom: 65px;
+    color: #ffffff;
+}
+.corpo-imagem{
+    text-align: center;
+    padding: 50px 0px 50px 0px;
+}
+/* Conteudo home */
+
+.corpo-home-forms{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.corpo-home-forms h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 50px 0px 60px 0px;
+    color: #8b0000;
+}
+.corpo-home-form1{
+    width: 49%;
+    display: inline-block;
+}
+.corpo-home-forms-separador{
+    height: 180px;
+    width: 1px;
+    display: inline-block;
+    background-color: #000000;
+}
+.corpo-home-form2{
+    width: 49%;
+    display: inline-block;
+}
+.corpo-home-form1 h2{
+    padding: 10px 0px 5px 0px;
+}
+.corpo-home-form1 a{
+    font-size: 14px;
+    padding-top: 10px;
+    font-style: italic;
+}
+.corpo-home-form1 a:link{
+    color: #000000;
+}
+.corpo-home-form1 a:visited{
+    color: #000000;
+}
+.corpo-home-form1 a:active{
+    color: #000000;
+}
+.corpo-home-form1 a:hover{
+    text-decoration: underline;
+}
+.form1-input{
+    border: 0px;
+    border-bottom: 1px solid;
+    height: 30px;
+    width: 70%;
+}
+.form1-login{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid;
+    background-color: #ffffff;
+    padding: 5px 100px 5px 100px;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+.form2-buscar{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid;
+    background-color: #ffffff;
+    padding: 5px 100px 5px 100px;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+.form2-input{
+    border: 0px;
+    border-bottom: 1px solid;
+    height: 30px;
+    width: 70%;
+    margin-bottom: 42px;
+}
+
+/* Conteudo Poslogin */
+
+.corpo-poslogin-titulo{
+    text-align: center;
+    width: auto;
+    margin: 30px 10px 90px 10px;
+}
+.corpo-poslogin-titulo h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.corpo-poslogin-titulo-button{
+    border: 2px solid;
+    border-color: #8b0000;
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+.corpo-poslogin-titulo img{
+    width: auto;
+    height: 10px;
+}
+.corpo-poslogin-menu{
+    display: none;
+}
+#ativosintelectuais{
+    display: none;
+}
+.corpo-poslogin-titulo li{
+    padding-top: 10px;
+}
+.corpo-poslogin-titulo a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+.corpo-poslogin-titulo a:link{
+    color: #000000;
+}
+.corpo-poslogin-titulo a:visited{
+    color: #000000;
+}
+.corpo-poslogin-titulo a:active{
+    color: #000000;
+}
+.corpo-poslogin-titulo a:hover{
+    text-decoration: underline;
+}
+.corpo-poslogin-conteudo{
+    margin-bottom: 40px;
+}
+.corpo-poslogin-conteudo-parte1{
+    display: inline-block;
+    width: 16%;
+}
+.corpo-poslogin-conteudo-parte2{
+    display: inline-block;
+    width: 1%;
+}
+.corpo-poslogin-conteudo-parte3{
+    display: inline-block;
+    width: 77%;
+    margin-left: 45px;
+}
+.corpo-poslogin-conteudo-novo h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.corpo-poslogin-conteudo-button{
+    text-align: center;
+    border: 2px solid;
+    border-color: #8b0000;
+    background-color: #8b0000;
+    width: 150px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+.corpo-poslogin-conteudo-checkbox{
+    margin-top: 10px;
+}
+.corpo-poslogin-conteudo-checkbox label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #000000;
+}
+.corpo-poslogin-conteudo-parte2{
+    width: 2px;
+    height: 111px;
+    background-color: #8b0000;
+    margin: 0px 6px 0px 6px;
+}
+.corpo-poslogin-conteudo-parte3-buscar{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid;
+    background-color: #ffffff;
+    padding: 5px 100px 5px 100px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-color: #8b0000;
+}
+.corpo-poslogin-conteudo-parte3-pesquisa{
+    border: 0px;
+    border-bottom: 1px solid;
+    height: 30px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+#novoativo{
+    display: none;
+}
+/* Footer */
+
+.footer a:link{
+    color: #ffffff;
+}
+.footer a:visited{
+    color: #ffffff;
+}
+.footer a:active{
+    color: #ffffff;
+}
+.footer a:hover{
+    text-decoration: underline;
+}
+.footer-div1{
+    text-align: center;
+    background-color: #a9a9a9;
+}
+.footer-div1 h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    padding-top: 15px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.footer-div1 p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+}
+.footer-div2 p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #ffffff;
+}
+.footer-div2{
+    text-align: center;
+    background-color: #7a7a7a;
+}
+
+
+
+/*.navbar-mobile{
+    text-align: center;
+}
+/* Menu mobile */
+
+/*#menu{
+    display: none;
+}
+#links{
+    display: none;
+
+}
+.container1 {
+    display: inline-block;
+    cursor: pointer;
+}
+  
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #03351d;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+#links ul{
+    margin: 0px 30px 0px 30px;
+    border: 1px solid;
+    border-color: #03351d;
+}
+#links li{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#links a:link{
+    color: #000000;
+}
+#links a:visited{
+    color: #000000;
+}
+/* Fim menu mobile */
+
+/*.header-navbar{
+    text-align: center;
+    background-color: #03351d;
+    height: 60px;
+}
+.header-navbar ul{
+    padding-top: 20px;
+}
+.header-navbar li{
+    display: inline;
+    padding: 0px 100px 0px 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+.header-navbar a:link{
+    color: #ffffff;
+}
+.header-navbar a:visited{
+    color: #ffffff;
+}
+.header-navbar a:hover{
+    text-decoration: underline;
+}
+
+
+/* Conteúdo */
+
+
+/*.corpo{
+    text-align: center;
+}
+.corpo h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+.corpo-pesquisa{
+    background-image: url("../img/img-linhasdepesquisa.png");
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+.corpo-pesquisa h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    padding-top: 120px;
+}
+.corpo-subtitulo{
+    width: 100%;
+    margin-top: 130px;
+    margin-bottom: 115px;
+}
+.borda1{
+    border: solid 1px;
+    border-color: #03351d;
+    width: 90%;
+    height: 60px;
+    margin-left: 5%;
+}
+.borda2{
+    border: solid 1px;
+    border-color: #03351d;
+    border-top-color: #ffffff;
+    width: 90%;
+    min-height: 250px;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.borda1 ul{
+    padding-top: 20px;
+}
+.borda1 li{
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+#subtitulo-underline1{
+    border-bottom: solid 1px;
+    padding-bottom: 7px;
+}
+.borda1 a:link{
+    color: #000000;
+}
+.subtitulo-tecnologiasocial{
+    margin: 0px 320px 0px 290px;
+}
+.borda1 a:visited{
+    color: #000000;
+}
+.borda-conteudo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+#tecnologiasocial-atributos{
+    display: none;
+}
+#tecnologiasocial-proposta{
+    display: none;
+}
+
+
+/*  avaliação */
+
+/*.subtitulo-avaliacao-objetivos{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+.subtitulo-avaliacao-dimensoes{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+.subtitulo-avaliacao-estrategia{
+    margin-right: 70px;
+}
+#subtitulo1-underline1{
+    border-bottom: solid 1px;
+    padding-bottom: 7px;
+}
+
+.borda2-avaliacao{
+    border: solid 1px;
+    border-color: #03351d;
+    border-top-color: #ffffff;
+    width: 90%;
+    height: 410px;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+}
+
+#avaliacao-objetivos{
+    display: none;
+}
+#avaliacao-processos{
+    display: none;
+}
+#avaliacao-dimensoes{
+    display: none;
+}
+#avaliacao-estrategia{
+    display: none;
+}
+#avaliacao-abordagem{
+    display: none;
+}
+
+/* tecnologia da informação */
+
+/*.subtitulo-tecnologiadainformacao{
+    margin: 0px 320px 0px 290px;
+}
+#subtitulo2-underline1{
+    border-bottom: solid 1px;
+    padding-bottom: 7px;
+}
+#tecnologiadainformacao-objetivos{
+    display: none;
+}
+#tecnologiadainformacao-estrategia{
+    display: none;
+}
+
+/* Gestão e Inovação */
+
+/*#subtitulo3-underline1{
+    border-bottom: solid 1px;
+    padding-bottom: 7px;
+}
+.subtitulo-gestaoeinovacao-objetivos{
+    margin-left: 110px;
+    margin-right: 110px;
+}
+.subtitulo-gestaoeinovacao-abordagem{
+    margin-left: 110px;
+    margin-right: 110px;
+}
+#gestaoeinovacao-objetivos{
+    display: none;
+}
+#gestaoeinovacao-estrategia{
+    display: none;
+}
+#gestaoeinovacao-abordagem{
+    display: none;
+}
+#gestaoeinovacao-modelos{
+    display: none;
+}
+
+/* Footer */
+
+/*.parceiros{
+    margin-top: 60px;
+    text-align: center;
+}
+#inovuerj{
+    width: auto;
+    height: 60px;
+}
+#itecs{
+    width: auto;
+    height: 50px;
+    padding: 0px 100px 0px 100px;
+}
+#sebrae{
+    width: auto;
+    height: 60px;
+}
+.sep{
+    width: 100%;
+    height: 1px;
+    background-color: #03351d;
+    margin: 40px 0px 0px 0px;
+}
+.footer-conteudo{
+    display: flex;
+    align-items: center;
+
+}
+.footer-conteudo-texto{
+    text-align: left;
+    display: inline-block;
+}
+.footer-conteudo-texto p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+.footer-conteudo-logos{
+    text-align: right;
+    width: 680px;
+    display: inline-block;
+}
+#uerj{
+    width: auto;
+    height: 50px;
+}
+#ime{
+    width: auto;
+    height: 50px;
+}
+
+
+
+/* Home */
+
+/*.corpo-home-cempre{
+    background-image: url("../img/coliseu4(google).jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+.corpo-home h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    padding-top: 140px;
+}
+.corpo-home-conteudo h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+.corpo-home-conteudo p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    padding-bottom: 40px;
+    text-indent: 15px;
+    width: 500px;
+}
+.corpo-home-conteudo{
+    text-align: left;
+    padding-top: 80px;
+    
+}
+.corpo-home-conteudo-texto{
+    display: inline-block;
+}
+
+.todos-cards{
+    float: right;
+}
+.row{
+    width: 319px;
+    -webkit-box-shadow: 2px 2px 10px #999; 
+    -moz-box-shadow: 2px 2px 10px #999;
+    box-shadow: 1px 1px 5px #999;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-left: 50px;
+}
+.row p{
+    padding:20px 10px;
+    text-indent: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #002046;
+    width: 100%;
+}
+
+#card-image{
+    height: 230px;
+    width: 100%;
+}
+.card-action{
+    padding-bottom: 10px;
+    
+}
+
+
+
+
+.corpo-home-avaliacao{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 50px;
+}
+.corpo-home-avaliacao h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+.corpo-home-avaliacao p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+.corpo-home-avaliação-tituloimg{
+    text-align: center;
+    display: inline-block;
+    width: 300px;
+}
+.corpo-home-avaliação-tituloimg1{
+    text-align: center;
+    display: inline-block;
+    width: 300px;
+    margin: 0px 60px 50px 60px;
+}
+#corpo-home-avaliacao-img{
+    width: auto;
+    height: 250px;
+}
+#corpo-home-avaliacao-img2{
+    width: auto;
+    height: 300px;
+}
+#consultoria{
+    padding-bottom: 50px;
+}
+#desenvolvimento{
+    padding-bottom: 50px;
+}
+#corpo-home-avaliacao-texto{
+    padding-top: 30px;
+}
+
+
+
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.rslides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.rslides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.rslides img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+}
