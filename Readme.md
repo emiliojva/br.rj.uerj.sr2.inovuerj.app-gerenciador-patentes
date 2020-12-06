@@ -1,1 +1,0 @@
-Colocar em xammp/htdocs
