@@ -4,7 +4,7 @@ logs
 node_modules
 composer.lock
 composer_2.phar
-App/Config/Database/my_db.ini
+Config/Database/my_db.ini
 *.ini
 public/uploads/
 .vscode/
