@@ -6,21 +6,54 @@ class Request
 {
   public $url;
 
-  public $method = 'GET'; // default web
+  private $_method;
 
   public function __construct()
   {
     $this->url = $_SERVER["REQUEST_URI"];
 
-    $this->method = empty($_SERVER['REQUEST_METHOD']) ? /* nothing do to */ : $_SERVER['REQUEST_METHOD'];
+    $this->_method = self::method();
 
   }
+
+  public function getPath(){
+   return self::uri();
+  }
+
+  public function getBaseUrl(){
+    return self::baseUrl();
+  }
+
+  public function getMethod(){
+    return self::method();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /****************************/
+  /***********FACADES**********/
+  /****************************/
 
   /**
    * Retorna URI atual
    * @return mixed|string
    */
-  public function getUri()
+  public static function uri()
   {
     $path = "";
     if (!empty($_SERVER['REQUEST_URI'])) {
@@ -35,7 +68,7 @@ class Request
       $path = "/";
     }
 
-    $uri = str_replace($this->getBaseUrl(), '', $path);
+    $uri = str_replace(self::baseUrl(), '', $path);
 
 //        $parse = parse_url($path, PHP_URL_PATH);
 //        var_dump($uri);
@@ -50,10 +83,15 @@ class Request
 
   }
 
-  private function getBaseUrl()
+  public static function baseUrl()
   {
     $startUrl = strlen($_SERVER["DOCUMENT_ROOT"]);
     return substr($_SERVER["SCRIPT_FILENAME"], $startUrl, -9);
+  }
+
+  public static function method()
+  {
+    return empty($_SERVER['REQUEST_METHOD']) ? 'GET' : $_SERVER['REQUEST_METHOD'];
   }
 
 

@@ -21,5 +21,9 @@
  */
 require_once '../vendor/autoload.php';
 
-$dispatcher = new \Core\Dispatcher();
-$dispatcher->run();
+
+/**
+ * Permite include e require capturarem a variavel ou retorno
+ */
+$app = new \Core\App();
+$app->dispatcher();
