@@ -1,0 +1,6 @@
+# Arquivo lido pelo webserver apache para redirecionar ou tratar requisições previamente.
+RewriteEngine on
+#RewriteBase /
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L] #RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ public/$1
+php_value post_max_size 20M

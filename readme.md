@@ -7,7 +7,7 @@
 - (algo mais importante ...)
 
 
-## Fundamentos da Aplicação Web
+## Fundamentos da Aplicação Web 
 
 Nos tópicos abaixo, o Elixir de uma aplicação web. 
 
@@ -42,6 +42,8 @@ Nos tópicos abaixo, o Elixir de uma aplicação web.
 #### Seguindo etapas do ["PHP The right way"](https://leanpub.com/phptherightway/read)
 
 1. [Estrutura de Pastas e Composer](/%23private/docs/phptherightway.com/readme-intro-v0.0.1.md)
+2. [Padrão de Projeto MVC](/%23private/docs/phptherightway.com/readme-mvc-v0.0.2.md)
+
 
 
 

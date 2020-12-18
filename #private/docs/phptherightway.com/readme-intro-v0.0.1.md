@@ -6,6 +6,7 @@
 
 - [PHP.net](https://www.php.net/manual/en/)
 - [PHP the right way](https://phptherightway.com)
+- [Padrões de Projeto](https://refactoring.guru/pt-br/design-patterns/php)
 
 ## Padronização de Codigo
 
