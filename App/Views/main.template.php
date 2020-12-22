@@ -25,7 +25,9 @@
     </header>
 
     <!-- Conteúdo -->
-    <?= $this->section('content') ?>
+    <div class="corpo-home container" id="corpo-home">
+        <?= $this->section('content') ?>
+    </div>
 
     <!-- Footer -->
     <div class="footer">

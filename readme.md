@@ -43,6 +43,7 @@ Nos tópicos abaixo, o Elixir de uma aplicação web.
 
 1. [Estrutura de Pastas e Composer](/%23private/docs/phptherightway.com/readme-intro-v0.0.1.md)
 2. [Padrão de Projeto MVC](/%23private/docs/phptherightway.com/readme-mvc-v0.0.2.md)
+3. [Rotas](/%23private/docs/phptherightway.com/readme-rotas-v0.0.3.md)
 
 
 
