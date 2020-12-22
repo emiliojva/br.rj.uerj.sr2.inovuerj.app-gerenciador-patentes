@@ -22,8 +22,12 @@
 require_once '../vendor/autoload.php';
 
 
+
+
 /**
- * Permite include e require capturarem a variavel ou retorno
+ * Execucao do despachante.
+ * Responsavel por captura e executacao das rotas encontradas
+ *
+ * (new class())->method() - Forma alternativa de, auto instanciar e executar um método
  */
-$app = new \Core\App();
-$app->dispatcher();
+(new \Core\App())->dispatcher();

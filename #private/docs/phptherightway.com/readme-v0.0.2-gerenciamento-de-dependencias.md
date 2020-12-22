@@ -1,34 +1,13 @@
-# PHP do jeito certo 
+# [](#instalacao-composer)Instalação do Composer 
 
-## Nosso melhores amigos
-
-#### Principais Referências
-
-- [PHP.net](https://www.php.net/manual/en/)
-- [PHP the right way](https://phptherightway.com)
-- [Padrões de Projeto](https://refactoring.guru/pt-br/design-patterns/php)
-
-## Padronização de Codigo
-
-Para melhor entendimento entre os desenvolvedores, o PHP possui uma comunidade reguladora, o php-fig.org. O qual criou as PSR's para lidar areas comuns do desenvolvimento (AUTOLOADING, INTERFACES, HTTP, CODING STYLES). 
-
-Quando você segue essas recomendações, você está se ajudando, ajudando a comunidade e seus companheiros de projeto.
-
-Os editores mais atuais conseguem corrigir em tempo real, o que está sendo codificado, utilizando-se de uma feature chamada PHP_CodeSniffer (No visual code e phpstorm já vem instalado)  
-
-
-#### PSR ou PHP Standard Recommendation 
-
-##### Principais Referências  
-
-- [Comunidade PSR](https://www.php-fig.org/)
-- [Style Code](https://phptherightway.com/#code_style_guide)
-
-
-## Principais Paradigmas 
-
-- Object-oriented Programming(OOP) ou Programação Orientada a Objeteos
-- Functional Programming ou Programação Funcional (like Javascript) 
+> **Objetivos desta etapa:**
+> 
+> *   Introduzir Gerenciamento de Dependencias
+> *   Instalar do Composer
+> *   demonstrar uma base de aplicação (Getting Started)
+> *   demonstrar como documentar classes com `phpDocumentor`
+> 
+> **Branch**: [](https://)
 
 
 ## Gerenciamento de Dependencias
@@ -43,7 +22,7 @@ Malandro é malandro e mané é mané. Não reinvente a roda! Vá de composer.
 - O que é e Como instalar o Composer neste link https://phptherightway.com/#composer_and_packagist
 
 
-#### Instalação do Composer
+## Instalação do Composer
 
 ##### Local - Via CLI (Command-line installation)
 

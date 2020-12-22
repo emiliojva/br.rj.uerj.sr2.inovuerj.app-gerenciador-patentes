@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Core\Router;
 
 class Request
 {
@@ -27,23 +27,6 @@ class Request
   public function getMethod(){
     return self::method();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /****************************/
   /***********FACADES**********/

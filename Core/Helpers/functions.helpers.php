@@ -15,22 +15,8 @@ function redirect($caminho){
  * @param $view
  * @param $params
  */
-function view($view,$params){
-  /**
-   * Iniciando Nossa Engine de Templates - Plates (Nativo do PHP)
-   * Conforme indicação da comunidade PHPTheRightWay.com
-   */
-  $templates = new League\Plates\Engine('../App/Views');
-
-  /**
-   * Permite usuario usar a notação "." (dot) para separar caminho das Views
-   */
-  $view = str_replace('.','/',$view);
-
-  /**
-   * Renderiza view incluindo parametros da rota
-   */
-  echo $templates->render($view,$params);
+function view(){
+  call_user_func_array('\Core\Controller\ControllerAction::view', func_get_args());
 }
 
 

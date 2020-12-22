@@ -17,11 +17,11 @@
       endif;
       unset($_SESSION['nao_autenticado']);
       ?>
-      <form action="login.php" method="POST">
+      <form action="/auth" method="POST">
         <h2>Usuário</h2>
-        <input class="form1-input" name="usuario" type="text" placeholder="Insira seu nome de usuário" autofocus="">
+        <input class="form1-input" name="usuario[email]" type="text" placeholder="Insira seu email de usuário" autofocus="">
         <h2>Senha</h2>
-        <input class="form1-input form1-password" type="password" name="senha"
+        <input class="form1-input form1-password" type="password" name="usuario[senha]"
                placeholder="Insira sua senha"><br>
         </br><a href="#">Esqueceu sua senha?</a></br>
         <input class="form1-login" type="submit" name="submit" value="login"><br>

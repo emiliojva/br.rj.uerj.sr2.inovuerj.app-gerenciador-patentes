@@ -1,9 +1,8 @@
 <?php
 
-namespace Core;
+namespace Core\Router;
 
 use Core\Helpers\Debug;
-use Core\Router\Router;
 
 class Dispatcher
 {
@@ -102,7 +101,7 @@ class Dispatcher
 
       /**
        * Retorna função(controller/action) que deverá ser executado
-       * E parametros ja processador por expressão regular nas rotas
+       * E parametros ja processados por expressão regular nas rotas
        * http://localhost/usuario/{id}/editar
        */
       return [

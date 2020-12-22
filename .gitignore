@@ -1,4 +1,6 @@
 .idea/
+.vscode/
+.cgi-*/
 vendor
 logs
 node_modules
@@ -7,5 +9,4 @@ composer_2.phar
 Config/Database/my_db.ini
 *.ini
 public/uploads/
-.vscode/
-.cgi-*/
+

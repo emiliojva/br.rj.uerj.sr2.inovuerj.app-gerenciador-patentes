@@ -6,20 +6,23 @@
 namespace Core\Router;
 
 use Core\Helpers\Debug;
-use Core\Request;
 use React\Promise\Util;
 
 class Router
 {
   private static $collection;
+  public static $request;
   private $method;
   private $path;
+
 
   public function __construct(Request $request)
   {
 
     $this->path = $request->getPath();
     $this->method = $request->getMethod();
+
+    self::$request = $request;
 
     if (!is_string($this->path)) {
       throw new \Exception("\$path precisa ser do tipo string");
