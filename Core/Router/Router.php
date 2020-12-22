@@ -44,8 +44,13 @@ class Router
   }
 
 
-  public static function all(){
-    return self::$collection;
+  public static function getAllByMethod($method = 'GET'){
+
+    if(!isset(self::$collection[$method]))
+      die('erro ao localizar metodo http');
+
+    return self::$collection[$method];
+
   }
 
   public function loadRoutes(){

@@ -8,15 +8,26 @@ use Core\Router\Router;
 class Dispatcher
 {
 
+  /**
+   * representa as requisições web da aplicação
+   * @var Request
+   */
   private $_request;
+
+  /**
+   * Representa a coleção de rotas da aplicação
+   * @var Router
+   */
   private $_router;
+
+  /**
+   * Representa a rota atual na barra de endereço ou recurso
+   * @var mixed|string
+   */
   private $_active_route;
 
   public function __construct()
   {
-
-    //    require_once 'core.php';
-
 
     /**
      * Instancia de uma Requisição
@@ -33,7 +44,6 @@ class Dispatcher
      */
     $this->_router->loadRoutes();
 
-
     /**
      * Rota atual da address bar
      */
@@ -41,36 +51,49 @@ class Dispatcher
 
   }
 
+  /**
+   * Instancia de um roteador
+   * @return Router
+   */
   public function getRouter()
   {
     return $this->_router;
   }
 
+  /**
+   * Executa o despachante mediante a captura do verbo http e array de rotas
+   * Retornando `callback` e `params` encontrados
+   * @return array
+   */
   public function run()
   {
     $result = NULL;
 
-    $arrayAllRoutes = Router::all();
+    /**
+     * Capturar o metodo(verbo http) atual.
+     * GET, POST, PUT, DELETE, PATCH OU OPTIONS
+     */
+    $http_method = $this->_request->getMethod();
 
-//    Debug::dump($this->_request->getPath(),"rota atual");
+    /**
+     * Pegar conjunto de rotas de acordo com metodo http atual
+     */
+    $arrayAllRoutesByMethod = Router::getAllByMethod($http_method);
 
-    foreach ($arrayAllRoutes as $method => $routes) {
+    /**
+     * Iterar por cada rota do metodo http atual
+     * Checar se existe o path e seus params
+     * Se encontrar, encerrar retornando `callback` e `params`.
+     */
+    foreach ($arrayAllRoutesByMethod as $route) {
 
-//      Debug::dump($routes,"rotas do method {$method}");
+      $path = $route[0];
+      $callback = $route[1];
 
-      foreach ($routes as $index => $route) {
+      $result = $this->checkUrlPath($path);
 
-        $path = $route[0];
-        $callback = $route[1];
-
-//        Debug::dump($route,"rota {$path}");
-
-        $result = $this->checkUrlPath($path);
-
-        if ($result) {
-          break; // interrompe loop caso encontre o resultado
-        }
-
+      if ($result) {
+        break; // interrompe loop caso encontre o resultado
       }
 
     }
@@ -89,11 +112,14 @@ class Dispatcher
 
     }
 
-
-
-
   }
 
+  /**
+   * Valida se é igual a rota da barra de endereço
+   * Retorna resultado com a rota encontrada e parametros encontrados
+   * @param $toFind
+   * @return array
+   */
   private function checkUrlPath($toFind)
   {
 

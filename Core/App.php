@@ -13,13 +13,18 @@ use Core\Helpers\Debug;
 class App
 {
 
+  /**
+   * Depachante.
+   * Camada responsavel por delegar controle das rotas e requisicoes
+   * @var Dispatcher
+   */
   private $_dispatcher;
 
   public function __construct()
   {
 
     /**
-     * Carregando Helpers Ajudantes
+     * Carregando Helpers/Ajudantes
      */
     require_once 'Helpers/functions.helpers.php';
 
