@@ -40,6 +40,10 @@ Router::get('/', function(){
 
 Router::get('/home', 'PublicController@home');
 
+Router::post('/auth', 'AuthenticationController@login');
+
+//Router::get('/auth', 'AuthenticationController@login');
+
 Router::get('/sobre','PublicController@about');
 
 Router::get('/usuario/{id}/editar', function($id){
@@ -62,3 +66,7 @@ Router::get('/processos/tipo/{tipo}/limit/{quantidade}', function($tipo,$quantid
   Debug::dump($quantidade);
   echo "Processos do tipo {$tipo} limitados a {$quantidade}";
 });
+
+
+# UsuarioController gerador de senha.
+Router::post('/admin/usuarios/gerarPassword/?', 'AuthenticationController@gerarSenha');
