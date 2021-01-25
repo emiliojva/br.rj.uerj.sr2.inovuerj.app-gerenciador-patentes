@@ -25,3 +25,5 @@
     4.2 [Implementando Controllers](/%23private/docs/phptherightway.com/readme-v0.1.2-implentando-controllers.md)
     
     4.3 [Implementando Views](/%23private/docs/phptherightway.com/readme-v0.1.3-implentando-views.md)
+    
+    4.4 [Implementando Models](/%23private/docs/phptherightway.com/readme-v0.1.4-implementando-models.md)
