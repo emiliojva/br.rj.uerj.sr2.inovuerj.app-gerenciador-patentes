@@ -35,7 +35,7 @@ class Usuario
 
     $statement->execute(
       array(
-        'email'=>$this->email,
+        'email' => $this->email,
       )
     );
 
@@ -49,7 +49,7 @@ class Usuario
     /**
      * Valida se foi encontrado email no retorno da Transaction
      */
-    if(!empty($result['email'])){
+    if (!empty($result['email'])) {
 
       /**
        * Captura hash de senha armazenado no banco
@@ -59,7 +59,7 @@ class Usuario
       /**
        * Se a hash conseguir validar a senha fornecida, metodo autenticar retorna true!
        */
-      if($this->decrypt($hash)){
+      if ($this->decrypt($hash)) {
         return true;
       }
 
@@ -72,18 +72,36 @@ class Usuario
 
   }
 
-  public function setSenha($senha){
+  /**
+   * Metodo para decodificar hash
+   * retorna true, se hash passada conseguir casar com senha(string/texto) passado via post;
+   *
+   * @param $hash
+   * @return bool
+   */
+  private function decrypt($hash)
+  {
+    if ($this->senha) {
+      return password_verify($this->senha, $hash);
+    }
+
+  }
+
+  public function setSenha($senha)
+  {
     $this->senha = $senha;
     return $this;
   }
 
-  public function setEmail($email){
-    $this->email = $email;
-    return $this;
+  public function getEmail()
+  {
+    return $this->email;
   }
 
-  public function getEmail(){
-    return $this->email;
+  public function setEmail($email)
+  {
+    $this->email = $email;
+    return $this;
   }
 
   /**
@@ -110,21 +128,6 @@ class Usuario
     $hash = password_hash($password, PASSWORD_BCRYPT, $hash_options);
 
     return $hash;
-
-  }
-
-  /**
-   * Metodo para decodificar hash
-   * retorna true, se hash passada conseguir casar com senha(string/texto) passado via post;
-   *
-   * @param $hash
-   * @return bool
-   */
-  private function decrypt($hash)
-  {
-    if ($this->senha) {
-      return password_verify($this->senha, $hash);
-    }
 
   }
 
