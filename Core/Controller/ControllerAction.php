@@ -8,9 +8,6 @@
 
 namespace Core\Controller;
 
-
-use Core\Helpers\Debug;
-
 abstract class ControllerAction
 {
 
@@ -27,6 +24,7 @@ abstract class ControllerAction
      * Conforme indicação da comunidade PHPTheRightWay.com
      */
   }
+
 
   /**
    * @return League\Plates\Engine
@@ -53,7 +51,5 @@ abstract class ControllerAction
     echo self::templateEngine()->render($view,$params);
 //    echo $templates->render($view,$params);
   }
-
-
 
 }

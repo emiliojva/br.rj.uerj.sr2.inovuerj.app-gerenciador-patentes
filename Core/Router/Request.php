@@ -2,6 +2,8 @@
 
 namespace Core\Router;
 
+use Core\Http\SessionManipulation;
+
 class Request
 {
   public $url;
@@ -77,6 +79,10 @@ class Request
     return empty($_SERVER['REQUEST_METHOD']) ? 'GET' : $_SERVER['REQUEST_METHOD'];
   }
 
+
+  public function session(){
+    return SessionManipulation::getInstance();
+  }
 
 
 }

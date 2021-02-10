@@ -93,20 +93,45 @@ class App
 
         /**
          *
-         * Os parametros dos controllers sendo outros os objetos não são instanciado automaticamente. Para isso, usamos uma padrão de projeto Dependency Injection(Injeção de Dependencia). Isto garante que todas as classes passadas por parametro serão "resolvidas" ou instanciadas (new Class()).
+         * Os parametros dos controllers sendo outros os objetos não são instanciado automaticamente.
+         * Para isso, usamos uma padrão de projeto Dependency Injection(Injeção de Dependencia ou DI).
+         * Isto garante que todas as classes passadas por parametro
+         * serão "resolvidas" ou instanciadas (new Class()).
+         *
+         * Neste caso, estamos resolvendo uma classe e os parametros do seu construtor(__construct())
          * @see https://php-di.org/doc/understanding-di.html
          */
         $resolver = new Resolver();
         $instanceController = $resolver->byClass($class);
 
+
         /**
-         * Invocando metodos dinamicamente e passando parametros.
+         * Precisaremos além da instancia da nossa classe de Controller.
+         * Agora vamos resolver os parametros do método que a rota executará.
+         *
+         * Ex: Router::get('/admin','AdminController@index');
+         * public function index( Request $request ) { }
+         *
+         * Precisaremos autoinstanciar o parametro $request de acordo com o tipo "Request"
+         *
+         */
+        $method_dependencies = $resolver->method($class,$method);
+
+        /**
+         *  Observem que os parametros são do tipo array e estão sendo combinados
+         *  Exemplo de união de arrays com sinal '+'
+         */
+        $params = $method_dependencies + $params;
+
+        /**
+         * Invocando metodos dinamicamente e passando parametros resolvidos e da requisição(GET,POST, ETC).
          */
         call_user_func_array([$instanceController, $method], $params);
 
-
       } else {
+
         throw new \Exception('Voce passou um Controller/action invalido:' . $result['controller'] . '@' . $result['action'] . 'Insira uma string com o seguinte padrao: HomeController@index');
+
       }
 
 

@@ -75,7 +75,7 @@ final class TConnection
                     $conn = new \PDO("mssql:host={$host},1433;dbname={$name}", $user, $pass);
                     break;
                 default :
-                    throw new \Exception('Erro de Conex�o');
+                    throw new \Exception('Erro de Conexão');
                     break;
             };
 

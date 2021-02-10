@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\Usuario;
 use Core\ADO\TTransaction;
 use Core\Controller\ControllerAction;
-use Core\Helpers\Debug;
+use Core\Router\Request;
 
 class AuthenticationController extends ControllerAction
 {
@@ -29,7 +29,7 @@ class AuthenticationController extends ControllerAction
    * Metodo de Autenticação
    * Action para lidar com post de dados enviado pelo formulario de login(/home)
    */
-  public function login()
+  public function login(Request $request)
   {
 
     /**
@@ -71,30 +71,42 @@ class AuthenticationController extends ControllerAction
     $usuario->setEmail($email);
     $usuario->setSenha($senha);
 
-
-
-
     /**
      * Valida se usuario foi autenticado
      */
     if ($usuario->autenticar()) {
 
-      $_SESSION['user_data'] = array(
-        'email' => $usuario->getEmail(),
-        'autenticado' => TRUE
-      );
+      /**
+       * Capturar uma instancia da sessão
+       */
+      $session = $request->session();
 
-      dd('Autenticado');
+      /**
+       * Usar o metodo user da Classe SessionManipulation para settar um usuario autenticado.
+       *
+       * O nosso objeto "$usuario" agora possui novos dados persistidos pelo método "autenticar()"
+       *
+       * o método toArray() de $usuario compactam as propriedades do objeto para um Array
+       *
+       */
 
-      $_SESSION['usuario'] = $usuario;
-      header('Location: poslogin.php');
-      exit();
+
+
+      $session->user( $usuario->toArray() );
+
+
+      /**
+       * Usar nossa helper redirect para leva para a rota /admin da aplicação
+       */
+      return redirect('/admin'); // No futuro iremos construir uma classe para lidar com redirects
 
     } else {
 
-      dd('erro nao autenticação');
-      header('Location: /');
-      exit();
+
+      /**
+       * Usar nossa helper redirect para retornar para pagina origem. Caso autenticação falhar.
+       */
+      return redirect('/');
 
     }
 

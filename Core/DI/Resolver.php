@@ -19,7 +19,7 @@ class Resolver
 {
   private $dependencies;
 
-  public function method($method, array $dependencies = [])
+  public function closure($method, array $dependencies = [])
   {
     $this->dependencies = $dependencies;
 
@@ -30,6 +30,33 @@ class Resolver
     $parameters = $this->resolveParameters($parameters);
 
     return call_user_func_array($info->getClosure(), $parameters);
+  }
+
+  /**
+   * Retorna dependencias resolvidas de um método de classe
+   *
+   * @param $class
+   * @param $method
+   * @return array
+   * @throws \ReflectionException
+   */
+  public function method($class,$method){
+
+    $r = new \ReflectionMethod($class,$method);
+    $parameters = $r->getParameters();
+
+    $dependencies = [];
+    foreach ($parameters as $parameter){
+      $reflectionNamedType = $parameter->getType();
+
+      if( $reflectionNamedType->getName() === "Core\Router\Request" ){
+        $dependencyClassName = (string)$reflectionNamedType->getName();
+        $dependencies[] = new $dependencyClassName();
+      }
+
+    }
+
+    return $dependencies;
   }
 
   public function byClass($class, array $dependencies = [])

@@ -27,3 +27,5 @@
     4.3 [Implementando Views](/%23private/docs/phptherightway.com/readme-v0.1.3-implentando-views.md)
     
     4.4 [Implementando Models](/%23private/docs/phptherightway.com/readme-v0.1.4-implementando-models.md)
+
+5. [Sessions - Autenticação](/%23private/docs/phptherightway.com/readme-v0.2.0-sessions.md)

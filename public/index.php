@@ -21,9 +21,6 @@
  */
 require_once '../vendor/autoload.php';
 
-
-
-
 /**
  * Execucao do despachante.
  * Responsavel por captura e executacao das rotas encontradas

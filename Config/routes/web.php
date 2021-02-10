@@ -68,5 +68,10 @@ Router::get('/processos/tipo/{tipo}/limit/{quantidade}', function($tipo,$quantid
 });
 
 
+/**
+ * Controller Administrativo - AdminController
+ */
+Router::get('/admin','AdminController@index');
+
 # UsuarioController gerador de senha.
 Router::post('/admin/usuarios/gerarPassword/?', 'AuthenticationController@gerarSenha');

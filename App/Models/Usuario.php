@@ -3,12 +3,25 @@
 namespace App\Models;
 
 use Core\ADO\TTransaction;
+use Core\Http\SessionManipulation;
 
 class Usuario
 {
 
+  private $id;
   private $email;
   private $senha;
+  private $ip_address;
+  private $user_agent;
+  private $init_activity;
+  private $last_activity;
+
+
+  /**
+   * Acionar quando persistimos do banco um array.
+   * @var $_from_array
+   */
+  private $_from_array = [];
 
   public function __construct()
   {
@@ -31,7 +44,7 @@ class Usuario
      */
     $conexao = TTransaction::get();
 
-    $statement = $conexao->prepare("select email,senha from usuario where email = :email");
+    $statement = $conexao->prepare("select id,email,senha from usuario where email = :email");
 
     $statement->execute(
       array(
@@ -52,25 +65,69 @@ class Usuario
     if (!empty($result['email'])) {
 
       /**
-       * Captura hash de senha armazenado no banco
+       * Capturar hash de senha armazenado no banco
        */
       $hash = $result['senha'];
+
+      /**
+       * Remover conteudo da senha do array de retorno
+       */
+      unset($result['senha']);
+
+      /**
+       * Preencher os atributos do objeto atraves do array de retorno do banco
+       */
+      $this->fromArray($result);
+
 
       /**
        * Se a hash conseguir validar a senha fornecida, metodo autenticar retorna true!
        */
       if ($this->decrypt($hash)) {
+
+        /*
+         * Anular senha que veio da entrada do post após validar.
+         */
+        $this->senha = null;
+
+        /**
+         * Informar que autenticou
+         */
         return true;
       }
 
     }
 
     /**
-     * Se conseguir chegar aqui, nao foi autenticado com a senha fornecida para class Usuario
+     * Não foi autenticado com a senha fornecida para class Usuario
      */
     return false;
 
   }
+
+
+  /**
+   * Preenche os atributos do objeto atraves de um array compativel.
+   * @param $array_row
+   */
+  public function fromArray($array_row){
+
+    $this->_from_array = $array_row;
+
+    foreach ($array_row as $col=>$value){
+      $this->{$col} = $value;
+    }
+
+  }
+
+  /**
+   * @return mixed
+   */
+  public function toArray(){
+    return $this->_from_array;
+  }
+
+
 
   /**
    * Metodo para decodificar hash
@@ -103,6 +160,8 @@ class Usuario
     $this->email = $email;
     return $this;
   }
+
+
 
   /**
    * Metodo para criptografar nosso password para o banco de dados.

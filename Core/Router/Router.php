@@ -5,9 +5,6 @@
 
 namespace Core\Router;
 
-use Core\Helpers\Debug;
-use React\Promise\Util;
-
 class Router
 {
   private static $collection;
