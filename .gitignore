@@ -6,6 +6,6 @@ logs
 node_modules
 composer.lock
 composer_2.phar
-Config/Database/my_db.ini
+Config/database/my_db.ini
 public/uploads/
 
