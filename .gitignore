@@ -7,6 +7,5 @@ node_modules
 composer.lock
 composer_2.phar
 Config/Database/my_db.ini
-*.ini
 public/uploads/
 
