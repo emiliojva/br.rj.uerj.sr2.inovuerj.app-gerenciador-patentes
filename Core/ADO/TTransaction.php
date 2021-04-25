@@ -33,9 +33,13 @@ final class TTransaction
   {
     // abre uma conexao PDO e mantem uma instancia unica na aplicação (singleTon)
     if (empty(self::$conn)) {
-      self::$conn = TConnection::open($database);
-      // inicia a transao
-      self::$conn->beginTransaction();
+      try {
+        self::$conn = TConnection::open($database);  
+        // inicia a transao
+        self::$conn->beginTransaction();
+      } catch (\Exception $e) {
+        dd($e->getMessage());
+      }
     }
   }
 

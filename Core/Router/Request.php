@@ -53,7 +53,8 @@ class Request
       $path = "/";
     }
 
-    $uri = str_replace(self::baseUrl(), '', $path);
+    // $uri = str_replace(self::baseUrl(), '', $path);
+    $uri = $path;
 
 //        $parse = parse_url($path, PHP_URL_PATH);
 //        var_dump($uri);

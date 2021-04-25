@@ -27,7 +27,7 @@ final class TConnection
     public static function open($name)
     {
 
-        $path = getcwd() . "/../Config/Database/{$name}.ini";
+        $path = getcwd() . "/../Config/database/{$name}.ini";
         // verifica se existe arquivo de configurao
         // para este banco de dados
         if (file_exists($path)) {
