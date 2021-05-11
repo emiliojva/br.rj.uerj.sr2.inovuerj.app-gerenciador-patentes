@@ -1,5 +1,3 @@
-<?php $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']) ?>
-
 <div class="caixa-botao grid-16">
 			<button class="botao">Novo Ativo</button><br>
 		</div>

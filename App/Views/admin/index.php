@@ -28,7 +28,7 @@
         <button class="corpo-poslogin-conteudo-button"><h3>Novo Projeto</h3></button>
       </div>
       <div id="novoativo" class="corpo-poslogin-conteudo-novo">
-        <button class="corpo-poslogin-conteudo-button"><h3>Novo Ativo</h3></button>
+        <button class="corpo-poslogin-conteudo-button" onclick="window.location.href='/admin/ativo/create'"><h3>Novo Ativo</h3></button>
       </div>
       <div class="corpo-poslogin-conteudo-checkbox">
         <input type="checkbox" id="emandamento" name="opcoes" value="emandamento">

@@ -217,6 +217,136 @@
 #novoativo{
     display: none;
 }
+
+/*Formulario*/
+
+h2{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #484b4d;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+input{
+    text-align: left;
+}
+
+input.texto, select{
+    width: 70%;
+    height: 40px;
+    border-color: #8b0000;
+}
+
+label{
+    text-align: left;
+    font-size: 17px;
+    color: #484b4d;
+    font-weight: bold;
+}
+
+.labels{
+    text-align: left;
+}
+
+.cotit{
+    margin-left: 0px;
+}
+
+.menu{
+    color: #fff;
+    text-align: center;
+    border: 2px solid;
+    border-color: #8b0000;
+    background-color: #8b0000;
+    width: 150px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 100px;
+    margin-left: 90px;
+}
+
+.final{
+    color: #fff;
+    text-align: center;
+    border: 2px solid;
+    border-color: #8b0000;
+    background-color: #8b0000;
+    width: 150px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: -20px;
+    margin-left: 220px;
+}
+
+.caixa{
+    margin-top: 5px;
+    text-align: center;
+    border: 1px solid;
+    border-color: #8b0000;
+    margin-bottom: 25px;
+}
+
+.interna{
+    width: 915px;
+}
+
+.caixa-botao{
+    margin-top: 5px;
+    text-align: center;
+}
+
+.botao{
+    font-weight: bold;
+    font-size: 17px;
+    color: #484b4d;
+    text-align: center;
+    border: 1px solid;
+    border-color: #8b0000;
+    background-color: #fff;
+    width: 250px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.botao_2{
+    font-weight: bold;
+    font-size: 17px;
+    color: #484b4d;
+    text-align: center;
+    border: 1px solid;
+    border-color: #8b0000;
+    border-style: dashed;
+    background-color: #fff;
+    width: 250px;
+    padding: 10px 0px 10px 0px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.radio {
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 10px;
+  height: 10px;
+}
+
+.radio:checked {
+  background: #333;
+}
+
+.radio_label{
+    margin-right: 30px;
+}
 /* Footer */
 
 .footer a:link{

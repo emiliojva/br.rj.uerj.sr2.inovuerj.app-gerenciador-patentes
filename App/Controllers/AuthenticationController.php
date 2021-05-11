@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Core\ADO\TTransaction;
 use Core\Controller\ControllerAction;
 use Core\Router\Request;
@@ -67,14 +67,14 @@ class AuthenticationController extends ControllerAction
     /**
      * Instancia de um objeto usuario
      */
-    $usuario = new Usuario();
+    $usuario = new User();
     $usuario->setEmail($email);
-    $usuario->setSenha($senha);
+    $usuario->setPassword($senha);
 
     /**
      * Valida se usuario foi autenticado
      */
-    if ($usuario->autenticar()) {
+    if ($usuario->auth()) {
 
       /**
        * Capturar uma instancia da sessão
@@ -89,9 +89,6 @@ class AuthenticationController extends ControllerAction
        * o método toArray() de $usuario compactam as propriedades do objeto para um Array
        *
        */
-
-
-
       $session->user( $usuario->toArray() );
 
 

@@ -2,36 +2,31 @@
 
 namespace App\Models;
 
+use Core\ADO\TModel;
 use Core\ADO\TTransaction;
-use Core\Http\SessionManipulation;
 
-class Usuario
+class User extends TModel
 {
+  protected $table = 'users';
 
   private $id;
   private $email;
-  private $senha;
+  private $password;
   private $ip_address;
   private $user_agent;
   private $init_activity;
   private $last_activity;
 
-
-  /**
-   * Acionar quando persistimos do banco um array.
-   * @var $_from_array
-   */
-  private $_from_array = [];
-
   public function __construct()
   {
+    parent::__construct();
   }
 
-
   /**
+   * Realiza autenticação se encontrar o email no tabela users do banco
    * @return bool
    */
-  public function autenticar()
+  public function auth()
   {
 
     /**
@@ -44,7 +39,7 @@ class Usuario
      */
     $conexao = TTransaction::get();
 
-    $statement = $conexao->prepare("select id,email,senha from usuario where email = :email");
+    $statement = $conexao->prepare("select id,email,password from {$this->table} where email = :email");
 
     $statement->execute(
       array(
@@ -67,18 +62,17 @@ class Usuario
       /**
        * Capturar hash de senha armazenado no banco
        */
-      $hash = $result['senha'];
-
+      $hash = $result['password'];
+      
       /**
        * Remover conteudo da senha do array de retorno
        */
-      unset($result['senha']);
+      unset($result['password']);
 
       /**
        * Preencher os atributos do objeto atraves do array de retorno do banco
        */
       $this->fromArray($result);
-
 
       /**
        * Se a hash conseguir validar a senha fornecida, metodo autenticar retorna true!
@@ -88,12 +82,13 @@ class Usuario
         /*
          * Anular senha que veio da entrada do post após validar.
          */
-        $this->senha = null;
+        $this->password = null;
 
         /**
          * Informar que autenticou
          */
         return true;
+        
       }
 
     }
@@ -105,30 +100,6 @@ class Usuario
 
   }
 
-
-  /**
-   * Preenche os atributos do objeto atraves de um array compativel.
-   * @param $array_row
-   */
-  public function fromArray($array_row){
-
-    $this->_from_array = $array_row;
-
-    foreach ($array_row as $col=>$value){
-      $this->{$col} = $value;
-    }
-
-  }
-
-  /**
-   * @return mixed
-   */
-  public function toArray(){
-    return $this->_from_array;
-  }
-
-
-
   /**
    * Metodo para decodificar hash
    * retorna true, se hash passada conseguir casar com senha(string/texto) passado via post;
@@ -138,15 +109,15 @@ class Usuario
    */
   private function decrypt($hash)
   {
-    if ($this->senha) {
-      return password_verify($this->senha, $hash);
+    if ($this->password) {
+      return password_verify($this->password, $hash);
     }
 
   }
 
-  public function setSenha($senha)
+  public function setPassword($password)
   {
-    $this->senha = $senha;
+    $this->password = $password;
     return $this;
   }
 

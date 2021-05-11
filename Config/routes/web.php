@@ -77,8 +77,8 @@ Router::get('/admin','AdminController@index');
  * Controller Administrativo - Resources para Rotas dos Bootys("Ativos", "Espólios")
  */
 // Router::get('/admin/ativo','BootyController@index');              # Listagem
-Router::get('/admin/ativo/create','BootyController@create');      # Formulario Novo Ativo
-// Router::post('/admin/ativo','BootyController@store');             # Post/Put para Form Novo Ativo
+Router::get('/admin/ativo/create','BootyController@create');         # Formulario Novo Ativo
+Router::post('/admin/ativo','BootyController@store');                # Post/Put para Form Novo Ativo
 // Router::get('/admin/ativo/{id}','BootyController@show');          # Formulario Editar Ativo
 // Router::get('/admin/ativo/{id}/edit','BootyController@edit');     # Formulario Editar Ativo
 // Router::post('/admin/ativo/{id}/edit','BootyController@update');  # Post/Put para Form Editar Ativo

@@ -85,5 +85,33 @@ class Request
     return SessionManipulation::getInstance();
   }
 
+  public function post($input = null){
+
+    if(!empty($_POST)){
+
+      // FILTER_SANITIZE_ENCODED
+      $inputs_filtered = $this->filter_input_array_with_default_flags(INPUT_POST, FILTER_SANITIZE_ENCODED,NULL);
+      return is_null($input) ? $inputs_filtered : $inputs_filtered[$input];
+    }
+    
+  }
+
+  private function filter_input_array_with_default_flags($type, $filter, $flags, $add_empty = true) {
+    $loopThrough = array();
+    switch ($type) {
+        case INPUT_GET : $loopThrough = $_GET; break;
+        case INPUT_POST : $loopThrough = $_POST; break;
+        case INPUT_COOKIE : $loopThrough = $_COOKIE; break;
+        case INPUT_SERVER : $loopThrough = $_SERVER; break;
+        case INPUT_ENV : $loopThrough = $_ENV; break;
+    }
+  
+    $args = array();
+    foreach ($loopThrough as $key=>$value) {
+        $args[$key] = array('filter'=>$filter, 'flags'=>$flags);
+    }
+   
+    return filter_input_array($type, $args, $add_empty);
+  }
 
 }
