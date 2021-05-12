@@ -48,7 +48,7 @@ abstract class ControllerAction
     /**
      * Renderiza view incluindo parametros da rota
      */
-    echo self::templateEngine()->render($view,$params);
+    return self::templateEngine()->render($view,$params);
 //    echo $templates->render($view,$params);
   }
 

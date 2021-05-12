@@ -64,9 +64,9 @@ final class SessionManipulation
   /**
    * Retornar ou settar um usuario autenticado na sessão
    * @param null $array_data_user
-   * @return array
+   * @return array|object
    */
-  public function user($array_data_user = NULL){
+  public function user($array_data_user = NULL, $with_array = false){
 
     if($array_data_user){
       self::setUser($array_data_user);
@@ -75,7 +75,7 @@ final class SessionManipulation
     /**
      * Armazenando usuario na Session da Aplicação
      */
-    return self::getUser();
+    return self::getUser($with_array);
 
   }
 
@@ -84,7 +84,7 @@ final class SessionManipulation
    * Retornar um usuario autenticado
    * @return array
    */
-  public static function getUser()
+  public static function getUser($with_array = false)
   {
 
     $array_user_data = [];
@@ -93,7 +93,7 @@ final class SessionManipulation
       $array_user_data = $_SESSION['user_data'];
     }
 
-    return $array_user_data;
+    return !$with_array ? (object)$array_user_data : $array_user_data ;
 
   }
 

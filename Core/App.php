@@ -8,7 +8,9 @@
 
 namespace Core;
 
+use Core\CORS\CorsMiddleware;
 use Core\DI\Resolver;
+use Core\Renderer\PHPRendererInterface;
 
 class App
 {
@@ -16,9 +18,19 @@ class App
   /**
    * Depachante.
    * Camada responsavel por delegar controle das rotas e requisicoes
-   * @var Dispatcher
+   * @property Dispatcher
    */
   private $_dispatcher;
+
+  /**
+   * @property CorsMiddleware
+   */
+  public static $CORS;
+
+  /**
+   * @property PHPRendererInterface
+   */
+  private $renderer;
 
   public function __construct()
   {
@@ -32,7 +44,7 @@ class App
     /**
      * Codificacao charset default
      */
-    @header('Content-Type: text/html; charset=UTF-8'); # LIB EMERGENCIAL PARA UTF-8 https://github.com/neitanod/forceutf8
+    // @header('Content-Type: text/html; charset=UTF-8'); # LIB EMERGENCIAL PARA UTF-8 https://github.com/neitanod/forceutf8
 
 
     /**
@@ -63,7 +75,20 @@ class App
 
     $this->run($method, $params);
 
+    return $this;
 
+  }
+
+  /**
+   * Defines Renderer strategy
+   *
+   * @param PHPRendererInterface $renderer
+   * @return void
+   */
+  public function setRender(PHPRendererInterface $renderer)
+  {
+    $this->renderer = $renderer;
+    return $this;
   }
 
   /**
@@ -78,6 +103,7 @@ class App
    */
   private function run($method, $params)
   {
+    $data = null;
     /**
      * Verifica se a rota é string e com padrão regex /^([A-Z]{1}[a-z]+Controller)@([a-z]+)$/
      * Construção de critério para casa controladores.
@@ -104,7 +130,6 @@ class App
         $resolver = new Resolver();
         $instanceController = $resolver->byClass($class);
 
-
         /**
          * Precisaremos além da instancia da nossa classe de Controller.
          * Agora vamos resolver os parametros do método que a rota executará.
@@ -126,7 +151,7 @@ class App
         /**
          * Invocando metodos dinamicamente e passando parametros resolvidos e da requisição(GET,POST, ETC).
          */
-        call_user_func_array([$instanceController, $method], $params);
+        $data = call_user_func_array([$instanceController, $method], $params);
 
       } else {
 
@@ -141,8 +166,23 @@ class App
      *  Verifica se o conteúdo da variável pode ser chamado como função(callable)
      */
     if (is_callable($method)) {
-      call_user_func_array($method, $params);
+      $data = call_user_func_array($method, $params);
     }
+
+    /**
+     * Capacitar ao PHPRenderer manipular cabeçalho antes de renderiza-lo
+     */
+    if(self::$CORS){
+      $this->renderer->setCORS(self::$CORS);
+    }
+
+    
+
+    /**
+     * Capturando 
+     */
+    $this->renderer->setData($data);// Pega o retorno resolvido da Rota (Incluindo params) e seta como conteudo do renderer
+    $this->renderer->run();
   }
 
   /**
@@ -153,14 +193,37 @@ class App
    */
   private function checkControllerAction($subject)
   {
-    if (preg_match('/^(([A-Z]{1}[a-z]+)+Controller)@([a-z]{1}[a-zA-Z0-9_-]+)$/', $subject, $variables)) {
+
+    /**
+     * Allow namespace match case into my routes
+     */
+    $namespace = null;
+    if(preg_match('/^([A-Z]{1}[a-z]+\\\)+/',$subject,$vars)){
+      $namespace = $vars[0] . '\\';
+    }
+
+    /**
+     * If has namespace matched into string $subject 
+     * includes string $namespace in new pattern regex
+     */
+    $pattern = "/^({$namespace}([A-Z]{1}[a-z]+)+Controller)@([a-z]{1}[a-zA-Z0-9_-]+)$/"; 
+
+    /**
+     * checks if has routes with/without namespace spaces handled aboved
+     */
+    if (preg_match($pattern, $subject, $variables)) {
 
       if (!empty($variables[0])) {
         $controller = $variables[1];
         $action = $variables[3];
+        $target_controller = "App\\Controllers\\" . $controller;
+
+        if(!class_exists($target_controller,true)){
+          throw new \Exception('Namespace ou Classe não existe');
+        }
 
         return [
-          'controller' => "App\\Controllers\\" . $controller,
+          'controller' => $target_controller,
           'action' => $action
         ];
       }

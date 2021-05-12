@@ -9,8 +9,10 @@ class Router
 {
   private static $collection;
   public static $request;
+  private static $mode;
   private $method;
   private $path;
+  
 
 
   public function __construct(Request $request)
@@ -40,22 +42,49 @@ class Router
 
   private static function request($method, $path, $fn)
   {
-    self::$collection[$method][] = [$path, $fn];
+    if(self::$mode === 'api'){
+      self::$collection[$method]['api'][] = [$path, $fn];  
+    } else {
+      self::$collection[$method]['web'][] = [$path, $fn];
+    }
   }
 
 
   public static function getAllByMethod($method = 'GET'){
 
-    if(!isset(self::$collection[$method]))
-      die('erro ao localizar metodo http');
+    $mode_currently = Request::getRouterMode();
 
-    return self::$collection[$method];
+    if(!isset(self::$collection[$method][$mode_currently]))
+      die('Error! Method Http does not located');
+
+    return self::$collection[$method][$mode_currently];
 
   }
 
-  public function loadRoutes(){
+  /**
+   * Load all maps according to request types (HTTP, API)
+   *
+   * @return void
+   */
+  public function loadRoutes()
+  {
+    
+    /**
+     * Map Routes to HTTP requests
+     */
+    self::setMode('web');
     require_once __DIR__.'/../../Config/routes/web.php';
+
+    /**
+     * Map Routes to API requests
+     */
+    self::setMode('api');
+    require_once __DIR__.'/../../Config/routes/api.php';
+    
   }
 
+  public static function setMode($flag){
+    self::$mode = $flag;
+  }
 
 }

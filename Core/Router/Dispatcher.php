@@ -1,9 +1,6 @@
 <?php
 
 namespace Core\Router;
-
-use Core\Helpers\Debug;
-
 class Dispatcher
 {
 
@@ -79,11 +76,14 @@ class Dispatcher
      */
     $arrayAllRoutesByMethod = Router::getAllByMethod($http_method);
 
+    
+
     /**
      * Iterar por cada rota do metodo http atual
      * Checar se existe o path e seus params
      * Se encontrar, encerrar retornando `callback` e `params`.
      */
+    $result = null;
     foreach ($arrayAllRoutesByMethod as $route) {
 
       $path = $route[0];
@@ -92,7 +92,7 @@ class Dispatcher
       $result = $this->checkUrlPath($path);
 
       if ($result) {
-        break; // interrompe loop caso encontre o resultado
+        break(1); // interrompe todos os loops foreach caso encontre o resultado
       }
 
     }

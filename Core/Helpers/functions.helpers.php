@@ -16,17 +16,48 @@ function redirect($caminho){
  * @param $params
  */
 function view(){
-  call_user_func_array('\Core\Controller\ControllerAction::view', func_get_args());
+  return call_user_func_array('\Core\Controller\ControllerAction::view', func_get_args());
 }
 
-
-function dump(){
-  call_user_func_array('\Core\Helpers\Debug::dump', func_get_args());
+if (!function_exists('dump')) {
+  function dump(){
+    call_user_func_array('\Core\Helpers\Debug::dump', func_get_args());
+  }
 }
 
-function dd(){
-  call_user_func_array('\Core\Helpers\Debug::dd', func_get_args());
+if (!function_exists('dd')) {
+  function dd(){
+    call_user_func_array('\Core\Helpers\Debug::dd', func_get_args());
+  }
 }
 
+/**
+ * Busca um valor em um array muldimensional atraves de um array unidimensional fornecido como segundo parametro
+ *
+ * @param [type] $data_arr
+ * @param [type] $data_arr_call
+ * @return void
+ */
+function flatCall($data_arr, $data_arr_call){
+  $current = $data_arr;
+  foreach($data_arr_call as $key){
+      $current = $current[$key];
+  }
+  return $current;
+}
+
+/**
+ * Remove spaces and converts empty string to NULL
+ *
+ * @param string $x
+ * @return void
+ */
+function sanitize($x){
+  if(strlen($x)==0){   $x = NULL;  } else {    
+    $x = filter_var($x,FILTER_SANITIZE_STRING);
+    $x = trim($x);  
+  }  
+  return $x;
+}
 
 

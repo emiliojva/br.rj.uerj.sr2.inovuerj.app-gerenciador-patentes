@@ -8,4 +8,4 @@ composer.lock
 composer_2.phar
 Config/database/my_db.ini
 public/uploads/
-
+.history

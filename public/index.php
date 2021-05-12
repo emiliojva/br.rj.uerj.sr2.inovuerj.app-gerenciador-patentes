@@ -27,4 +27,6 @@ require_once '../vendor/autoload.php';
  *
  * (new class())->method() - Forma alternativa de, auto instanciar e executar um método
  */
-(new \Core\App())->dispatcher();
+(new \Core\App())
+  ->setRender(new \Core\Renderer\PHPRenderer())
+  ->dispatcher();
