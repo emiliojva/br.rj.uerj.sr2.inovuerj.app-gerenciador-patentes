@@ -23,9 +23,7 @@ class AdminController extends ControllerAction
     /**
      * Obter usuário autenticado via session method
      */
-    $usuario_autenticado = $request->session()->user();
-
-//    dd($usuario_autenticado);
+    $usuario_autenticado = $request->session()->user(null,true);
 
     /**
      * Dados que serão utilizados como variaveis na view.

@@ -5,25 +5,25 @@
 		</div>
 		<div class="caixa grid-16">
 			<h2>Informações Básicas</h2>
-			<form>
+			<form id="form-informacoes-basicas" method="post" action="/admin/ativo" name="data[intellectual_assets]">
 				<label for="nome_ativo">Nome do Ativo:</label><br>
-				<input class="texto" type="text" id="nome_ativo" name="nome_ativo"><br><br>
+				<input class="texto" type="text" id="nome_ativo" name="data[intellectual_assets][name]"><br><br>
 
 				<label for="resumo_ativo">Resumo do Ativo:</label><br>
-				<input class="texto" type="text" id="resumo_ativo" name="resumo_ativo"><br><br>
+				<input class="texto" type="text" id="resumo_ativo" name="data[intellectual_assets][summary]"><br><br>
 
 				<label for="tipo_ativo">Tipo do Ativo:</label><br>
-				<select>
-					<option value="patente">Patente</option>
-					<option value="mod_util">Modelo de Utilidade</option>
-					<option value="desenho">Desenho Industrial</option>
-					<option value="programa">Programa de Computador</option>
-					<option value="direito">Direito Autoral</option>
-					<option value="marca">Marca</option>
+				<select name="data[intellectual_assets][intellectual_assets_types_id]">
+					<option value="1">Patente</option>
+					<option value="2">Modelo de Utilidade</option>
+					<option value="3">Desenho Industrial</option>
+					<option value="4">Programa de Computador</option>
+					<option value="5">Direito Autoral</option>
+					<option value="6">Marca</option>
 				</select>
 			</form>
 			<button class="menu">Cancelar</button>
-			<button class="menu">Salvar</button>
+			<button class="menu" onclick="$('#form-informacoes-basicas').submit();">Salvar</button>
 		</div>
 		<div class="num_reg caixa grid-16">
 			<h2>Numero de Registro</h2>
