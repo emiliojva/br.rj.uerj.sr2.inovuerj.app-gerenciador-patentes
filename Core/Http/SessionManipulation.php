@@ -7,6 +7,8 @@ final class SessionManipulation
 
   private static $instance = null;
 
+  
+
   private function __construct()
   {
 
@@ -26,6 +28,18 @@ final class SessionManipulation
       session_start();
     }
 
+  }
+
+  /**
+   * Handle dynamic static method calls into the method.
+   *
+   * @param  string  $method
+   * @param  array  $parameters
+   * @return mixed
+   */
+  public static function __callStatic($method, $parameters)
+  {
+    return (new static)->getInstance()->$method(...$parameters);
   }
 
   /**

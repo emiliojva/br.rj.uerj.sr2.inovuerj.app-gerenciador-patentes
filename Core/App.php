@@ -11,6 +11,8 @@ namespace Core;
 use Core\CORS\CorsMiddleware;
 use Core\DI\Resolver;
 use Core\Renderer\PHPRendererInterface;
+use Core\Router\Request;
+use Core\Router\Router;
 
 class App
 {
@@ -32,6 +34,15 @@ class App
    */
   private $renderer;
 
+
+  /**
+   * controller default que possui settings de comportamento dos demais
+   *
+   * @property string $controller
+   */
+  private $controller_default = 'PublicController';
+  private $pageNotFoundAction = 'pageNotFound';
+
   public function __construct()
   {
 
@@ -39,7 +50,6 @@ class App
      * Carregando Helpers/Ajudantes
      */
     require_once 'Helpers/functions.helpers.php';
-
 
     /**
      * Codificacao charset default
@@ -54,24 +64,48 @@ class App
 
   }
 
+  public function setControllerPageNotFoundAction($controller, $action)
+  {
+    $this->controller_default = $controller;
+    $this->pageNotFoundAction = $action;
+  }
+
+  public function getControllerPageNotFoundAction()
+  {
+    return "{$this->controller_default}@{$this->pageNotFoundAction}";
+  }
 
   /**
    * Despachante para controladores
    */
   public function dispatcher()
   {
+
     /**
+     * Rota não existe na collection de rotas
+     * Tratamento para page-not-found
+     */
+    $method = $this->getControllerPageNotFoundAction();
+    $params = [];
+
+     /**
      * pega o retorno do dispatcher ja resolvido com callback e params da rota.
      */
     $result = $this->_dispatcher->run();
 
-    if (!$result)
-      exit('Rota não encontrada');
+    
 
+    if (!is_null($result)){
+      $method = $result['callback'];
+      $params = $result['params'];
+    } else {
 
-    $method = $result['callback'];
-    $params = $result['params'];
+      if(Request::isAjax()){
+        @header('Content-type: application/json');
+        echo json_encode(['error'=>true, '_body'=>'Page not Found']); exit(1);
+      }
 
+    }
 
     $this->run($method, $params);
 
@@ -104,85 +138,104 @@ class App
   private function run($method, $params)
   {
     $data = null;
-    /**
-     * Verifica se a rota é string e com padrão regex /^([A-Z]{1}[a-z]+Controller)@([a-z]+)$/
-     * Construção de critério para casa controladores.
-     */
-    if (is_string($method)) {
 
-      $result = $this->checkControllerAction($method);
+    try {
 
-      if ($result['controller'] && $result['action']) {
-
-        $class = $result['controller'];
-        $method = $result['action'];
+      /**
+       * Verifica se a rota é string e com padrão regex /^([A-Z]{1}[a-z]+Controller)@([a-z]+)$/
+       * Construção de critério para casa controladores.
+       */
+      if (is_string($method)) {
 
         /**
-         *
-         * Os parametros dos controllers sendo outros os objetos não são instanciado automaticamente.
-         * Para isso, usamos uma padrão de projeto Dependency Injection(Injeção de Dependencia ou DI).
-         * Isto garante que todas as classes passadas por parametro
-         * serão "resolvidas" ou instanciadas (new Class()).
-         *
-         * Neste caso, estamos resolvendo uma classe e os parametros do seu construtor(__construct())
-         * @see https://php-di.org/doc/understanding-di.html
+         * Valida se existe controller e method validos para executar pagina
          */
-        $resolver = new Resolver();
-        $instanceController = $resolver->byClass($class);
+        $result = $this->checkControllerAction($method);
 
-        /**
-         * Precisaremos além da instancia da nossa classe de Controller.
-         * Agora vamos resolver os parametros do método que a rota executará.
-         *
-         * Ex: Router::get('/admin','AdminController@index');
-         * public function index( Request $request ) { }
-         *
-         * Precisaremos autoinstanciar o parametro $request de acordo com o tipo "Request"
-         *
-         */
-        $method_dependencies = $resolver->method($class,$method);
+        if ($result['controller'] && $result['action']) {
 
-        /**
-         *  Observem que os parametros são do tipo array e estão sendo combinados
-         *  Exemplo de união de arrays com sinal '+'
-         */
-        $params = $method_dependencies + $params;
+          $class = $result['controller'];
+          $method = $result['action'];
 
-        /**
-         * Invocando metodos dinamicamente e passando parametros resolvidos e da requisição(GET,POST, ETC).
-         */
-        $data = call_user_func_array([$instanceController, $method], $params);
+          /**
+           *
+           * Os parametros dos controllers sendo outros os objetos não são instanciado automaticamente.
+           * Para isso, usamos uma padrão de projeto Dependency Injection(Injeção de Dependencia ou DI).
+           * Isto garante que todas as classes passadas por parametro
+           * serão "resolvidas" ou instanciadas (new Class()).
+           *
+           * Neste caso, estamos resolvendo uma classe e os parametros do seu construtor(__construct())
+           * @see https://php-di.org/doc/understanding-di.html
+           */
+          $resolver = new Resolver();
+          $instanceController = $resolver->byClass($class);
 
-      } else {
+          /**
+           * Precisaremos além da instancia da nossa classe de Controller.
+           * Agora vamos resolver os parametros do método que a rota executará.
+           *
+           * Ex: Router::get('/admin','AdminController@index');
+           * public function index( Request $request ) { }
+           *
+           * Precisaremos autoinstanciar o parametro $request de acordo com o tipo "Request"
+           *
+           */
+          $method_dependencies = $resolver->method($class,$method);
 
-        throw new \Exception('Voce passou um Controller/action invalido:' . $result['controller'] . '@' . $result['action'] . 'Insira uma string com o seguinte padrao: HomeController@index');
+          /**
+           *  Observem que os parametros são do tipo array e estão sendo combinados
+           *  Exemplo de união de arrays com sinal '+'
+           */
+          $params = $method_dependencies + $params;
+
+          /**
+           * Invocando metodos dinamicamente e passando parametros resolvidos e da requisição(GET,POST, ETC).
+           */
+          $data = call_user_func_array([$instanceController, $method], $params);
+
+        } else {
+
+          throw new \Exception('Voce passou um Controller/action invalido:' . $result['controller'] . '@' . $result['action'] . 'Insira uma string com o seguinte padrao: HomeController@index');
+
+        }
+
 
       }
 
+      /**
+       *  Verifica se o conteúdo da variável pode ser chamado como função(callable)
+       */
+      if (is_callable($method)) {
+        $data = call_user_func_array($method, $params);
+      }
 
-    }
+      /**
+       * Capacitar ao PHPRenderer manipular cabeçalho antes de renderiza-lo
+       */
+      if(self::$CORS){
+        $this->renderer->setCORS(self::$CORS);
+      }
 
-    /**
-     *  Verifica se o conteúdo da variável pode ser chamado como função(callable)
-     */
-    if (is_callable($method)) {
-      $data = call_user_func_array($method, $params);
-    }
+      /**
+       * Capturando 
+       */
+      $this->renderer->setData($data);// Pega o retorno resolvido da Rota (Incluindo params) e seta como conteudo do renderer
+      $this->renderer->run();
 
-    /**
-     * Capacitar ao PHPRenderer manipular cabeçalho antes de renderiza-lo
-     */
-    if(self::$CORS){
-      $this->renderer->setCORS(self::$CORS);
+    } catch (\Exception $e) {
+
+      $data = null;
+      $msg = "Controller/Action {$method} não podem ser localizados";
+      if(Request::isAjax()){
+        $data = ['error'=>true, '_body'=>$msg];
+      } else {
+        $data = $msg;
+      }
+      $this->renderer->setData($data);// Pega o retorno resolvido da Rota (Incluindo params) e seta como conteudo do renderer
+      $this->renderer->run();
     }
 
     
-
-    /**
-     * Capturando 
-     */
-    $this->renderer->setData($data);// Pega o retorno resolvido da Rota (Incluindo params) e seta como conteudo do renderer
-    $this->renderer->run();
   }
 
   /**

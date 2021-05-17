@@ -126,4 +126,11 @@ abstract class TModel extends \Illuminate\Database\Eloquent\Model {
 
   }
 
+  public static function last()
+  {
+    return self::latest()->first();
+  }
+
+  
+
 }
