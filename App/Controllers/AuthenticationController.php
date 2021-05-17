@@ -139,7 +139,7 @@ class AuthenticationController extends ControllerAction
         throw new \Exception('Password invalido');
       }
 
-      $objUsuario = new Usuario();
+      $objUsuario = new User();
 
       echo "<pre>";
       echo "=================================================";
