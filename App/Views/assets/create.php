@@ -1,11 +1,18 @@
-<?php $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']) ?>
+<?php
+
+use Core\Router\Request;
+
+$this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']) ?>
 
 <div class="caixa-botao grid-16">
 			<button class="botao">Novo Ativo</button><br>
 		</div>
-		<div class="caixa grid-16">
+		<div class="caixa grid-16" id="box-form-basic-information">
 			<h2>Informações Básicas</h2>
-			<form id="form-informacoes-basicas" method="post" action="/admin/ativo" name="data[intellectual_assets]">
+			<form method="post" action="/admin/ativo" name="data[intellectual_assets]">
+
+				<input type="hidden" id="intellectual_asset_id" name="data[intellectual_assets][id]"><br><br>
+
 				<label for="nome_ativo">Nome do Ativo:</label><br>
 				<input class="texto" type="text" id="nome_ativo" name="data[intellectual_assets][name]"><br><br>
 
@@ -21,9 +28,10 @@
 					<option value="5">Direito Autoral</option>
 					<option value="6">Marca</option>
 				</select>
+				<button class="menu">Cancelar</button>
+				<button class="menu button-save">Salvar</button>	
 			</form>
-			<button class="menu">Cancelar</button>
-			<button class="menu" onclick="$('#form-informacoes-basicas').submit();">Salvar</button>
+			
 		</div>
 		<div class="num_reg caixa grid-16">
 			<h2>Numero de Registro</h2>
@@ -55,10 +63,10 @@
 				<input class="texto" type="number" name="tel_autor" id="tel_autor"><br><br>
 
 				<label for="rg_autor">RG:</label><br>
-				<input class="texto" type="number" name="rg_autor" id="rg_autor"><br><br>
+				<input class="texto rg" type="text" name="rg_autor" id="rg_autor"><br><br>
 
 				<label for="cpf_autor">CPF:</label><br>
-				<input class="texto" type="number" name="cpf_autor" id="cpf_autor"><br><br>
+				<input class="texto cpf" type="text" name="cpf_autor" id="cpf_autor"><br><br>
 
 				<label for="end_autor">Endereço:</label><br>
 				<input class="texto" type="text" name="end_autor" id="end_autor"><br><br>
@@ -96,7 +104,7 @@
 				<input class="texto" type="text" name="fixo" value="UERJ"><br><br>
 				
 				<label for="cnpj1">CNPJ:</label><br>
-				<input class="texto" type="number" name="cnpj1" id="cnpj1"><br><br>
+				<input class="texto cnpj" type="text" name="cnpj1" id="cnpj1"><br><br>
 
 				<label for="proc">Procurador:</label><br>
 				<input class="texto" type="text" name="proc" id="proc"><br><br>
@@ -111,7 +119,7 @@
 					<input class="texto" type="text" name="nome_inst" id="nome_inst"><br><br>
 
 					<label for="cnpj2">CNPJ:</label><br>
-					<input class="texto" type="number" name="cnpj2" id="cnpj2"><br><br>
+					<input class="texto cnpj" type="number" name="cnpj2" id="cnpj2"><br><br>
 
 					<label for="proc_uerj">Número do Processo UERJ:</label><br>
 					<input class="texto" type="number" name="proc_uerj"><br><br>
@@ -164,3 +172,6 @@
 		</div>
 		<button class="final">Cancelar</button>
 		<button class="final">Salvar</button>
+
+
+		<!-- <script src="<?php echo Request::baseUrl() ?>node_modules/jquery/dist/jquery.min.js"></script> -->

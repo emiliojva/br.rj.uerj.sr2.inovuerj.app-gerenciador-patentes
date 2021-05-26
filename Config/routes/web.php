@@ -73,16 +73,18 @@ Router::get('/processos/tipo/{tipo}/limit/{quantidade}', function($tipo,$quantid
  */
 Router::get('/admin','AdminController@index');
 
+
+
 /**
  * Controller Administrativo - Resources para Rotas dos Assets("Ativos", "Espólios")
 */
 Router::get('/admin/ativo','IntellectualAssetController@index');              # Listagem
 Router::get('/admin/ativo/create','IntellectualAssetController@create');      # Formulario Novo Ativo
-Router::post('/admin/ativo','Api\IntellectualAssetController@store');         # Post/Put para Form Novo Ativo
-Router::get('/admin/ativo/{id}','IntellectualAssetController@show');          # Formulario Editar Ativo
-Router::get('/admin/ativo/{id}/edit','IntellectualAssetController@edit');     # Formulario Editar Ativo
-Router::post('/admin/ativo/{id}/edit','IntellectualAssetController@update');  # Post/Put para Form Editar Ativo
-Router::post('/admin/ativo/{id}','IntellectualAssetController@destroy');      # Deletar/Destroy Ativo
+// Router::post('/admin/ativo','Api\IntellectualAssetController@store');         # Post para Form Novo Ativo
+// Router::get('/admin/ativo/{id}','IntellectualAssetController@show');          # Formulario Editar Ativo
+// Router::get('/admin/ativo/{id}/edit','IntellectualAssetController@edit');     # Formulario Editar Ativo
+// Router::post('/admin/ativo/{id}/edit','IntellectualAssetController@update');  # Post/Put para Form Editar Ativo
+// Router::post('/admin/ativo/{id}','IntellectualAssetController@destroy');      # Deletar/Destroy Ativo
 
 # UsuarioController gerador de senha.
 Router::post('/admin/usuarios/gerarPassword/?', 'AuthenticationController@gerarSenha');

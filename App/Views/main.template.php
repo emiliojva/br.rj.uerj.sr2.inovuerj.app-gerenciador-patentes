@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-controller="<?=$this->e($controllerName)?>" data-active-route="<?=$this->e($active_route)?>">
 
   <head>
     <meta charset="utf-8">
@@ -43,9 +43,15 @@
       </div>
     </div>
 
+    <script src="<?php echo siteUrl(); ?>js/dist/bundle.js"></script>
 
     <!-- JavaScript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- Carregamento no módulo requireJS -->
+    <!-- <script data-main="/js/app" src="js/lib/require.min.js"></script>  -->
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js Ou -> https://requirejs.org/docs/release/2.3.6/minified/require.js -->
+    
+    <!--https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js Ou -> https://requirejs.org/docs/release/2.3.6/minified/require.js -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
     <!--    <script>window.jquery || document.write('<script src="/js/libs/jquery-3.4.1.min.js"><\/script>')</script>-->
     <!--    <script src="/js/plugins.js"></script>-->
     <!--    <script src="/js/index.js"></script>-->

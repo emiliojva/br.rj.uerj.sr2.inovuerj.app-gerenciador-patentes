@@ -1,0 +1,28 @@
+/**
+* tsconfig.json
+* Chamando 'tsc' sem arquivos de entrada, 
+* nesse caso o compilador procura pelo arquivo tsconfig.json iniciando no diretório atual 
+* e continuando a cadeia de diretórios pai
+*/
+{
+  "compilerOptions": {
+    "rootDir"         : "resources/typescript", // Path raiz contendo arquivos .ts
+    "outDir"          : "public/js/bundled/" , // Path com saída transpilada do arquivo .js
+    "sourceMap"       : true,
+    "noImplicitAny"   : true,
+    "module"          : "ES2020",
+    "target"          : "es5",
+    "jsx"             : "react",
+    "allowJs"         : true,
+    "moduleResolution": "node",
+    // "module"    : "AMD",
+    // "target"    : "ES6"       , // Especificação do ECMAScript utilizada
+    // "rootDir"   : "resources/typescript"      , // Path raiz contendo arquivos .ts
+    // "outDir"    : "public/js/bundled/" , // Path com saída transpilada do arquivo .js
+    // "allowSyntheticDefaultImports": true
+    
+  },
+  "files": [
+      "resources/typescript/main.ts"
+  ]
+}
