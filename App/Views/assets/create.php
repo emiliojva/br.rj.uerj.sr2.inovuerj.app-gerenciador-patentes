@@ -9,7 +9,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 		</div>
 		<div class="caixa grid-16" id="box-form-basic-information">
 			<h2>Informações Básicas</h2>
-			<form method="post" action="/admin/ativo" name="data[intellectual_assets]">
+			<form>
 
 				<input type="hidden" id="intellectual_asset_id" name="data[intellectual_assets][id]"><br><br>
 
@@ -31,24 +31,35 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 				<button class="menu">Cancelar</button>
 				<button class="menu button-save">Salvar</button>	
 			</form>
-			
 		</div>
-		<div class="num_reg caixa grid-16">
+		<div class="num_reg caixa grid-16" id="box-form-registration-number">
 			<h2>Numero de Registro</h2>
-			<form >
-				<label for="numero">Numero:</label><br>
-				<input class="texto" type="number" name="numero" id="numero"><br><br>
+			<form>
 
-				<label>Agencia de Proteção:</label><br><br>
+				<section class='control'>
+					<label for="numero">Numero:</label><br>
+					<input class="texto" type="text" name="numero" id="numero" required><br><br>
+				</section>
 
-				<input class="radio" type="radio" name="ag_protecao" value="inpi">
-				<label class="radio_label" for="inpi">INPI</label>
+				<section class='control'>
+					
+					<label>Agencia de Proteção:</label><br><br>
 
-				<input class="radio" type="radio" name="ag_protecao" value="bib_nacional">
-				<label class="radio_label" for="bib_nacional">Biblioteca Nacional</label>
+					<input class="radio" type="radio" name="ag_protecao" value="inpi">
+					<label class="radio_label" for="inpi">INPI</label>
+
+					<input class="radio" type="radio" name="ag_protecao" value="bib_nacional">
+					<label class="radio_label" for="bib_nacional">Biblioteca Nacional</label>
+
+				</section>
+
+				<section class='actions'>
+					<button class="menu">Cancelar</button>
+					<button class="menu button-save">Salvar</button>	
+				</section>
+
 			</form>
-			<button class="menu">Cancelar</button>
-			<button class="menu">Salvar</button>
+		
 		</div>
 		<div class="autores caixa grid-16">
 			<h2>Autores</h2>

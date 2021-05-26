@@ -4,46 +4,84 @@ import EventManager from '../../../services/event-manager';
 import axios from "axios";
 import * as $ from "jquery";
 import "jquery-mask-plugin";
-import { Form } from './_forms/form';
+import { Form } from '../../_forms/form';
 import { ApiService } from '../../../services/api.service';
 
 
 export class CreatePage extends ControllerPage {
 
+  /**
+   * Deps
+   */
   private eventManager: EventManager; 
   private apiService: ApiService
 
+  /**
+   * Forms
+   */
+  private formBasicInformation:Form;
+  private formRegistrationNumber:Form;
+
+  /**
+   * Form Tokens IDs
+   */
   static boxFormBasicInformationTokenId:string = 'box-form-basic-information';
+  static boxFormRegistrationNumberTokenId:string = 'box-form-registration-number';
   
   constructor(){
      super();
   }
 
-  protected init() {
+  protected init() 
+  {
 
     this.apiService = new ApiService();
-
-    const $contextPage = this;
 
     this.masks();
 
     /**
      * starter flow instruction for handle "Basic Information" Form
      */
-    this.formBasicInformation();
+    this.formBasicInformationConstruct();
+
+    /**
+     * starter flow instruction for handle "Registration Number" Form
+     */
+     this.formRegistrationNumberConstruct();
   
   }
 
-  private formBasicInformation(): void 
+  private formBasicInformationConstruct(): void 
   {
     /**
      * Basic Information Form Instance
      */
-    const formBasicInformation = new Form(CreatePage.boxFormBasicInformationTokenId);
-    formBasicInformation.onSubmit( (form: HTMLFormElement) => {
-      this.apiService.postToIntellectualAssetStore(form);
-    });
+    this.formBasicInformation = new Form(CreatePage.boxFormBasicInformationTokenId);
+    this.formBasicInformation
+      .setMethod('post')
+      .setAction('/admin/ativo')
+      .onSubmit( (formData: FormData) => {
+        this.apiService.postToIntellectualAssetStore(formData).then( (response) => {
+          console.log(response)
+          alert('ois')
+          this.formBasicInformation.setInputHiddenId( response.id );
+        });
+      });
+  }
 
+  private formRegistrationNumberConstruct(): void 
+  {
+    /**
+     * Registration Number Form Instance
+     */
+    this.formRegistrationNumber = new Form(CreatePage.boxFormRegistrationNumberTokenId);
+    this.formRegistrationNumber
+      .setMethod('post')
+      .setAction('/admin/ativo')
+      .onSubmit( (formData: FormData) => {
+        // this.formBasicInformation.()
+        this.apiService.postToIntellectualAssetStore(formData);
+      });
   }
 
   /**
@@ -54,7 +92,8 @@ export class CreatePage extends ControllerPage {
     $('.cnpj').mask('00.000.000/0000-00');
   }
 
-  public httpPost(url:string, form_data:FormData, options?:{}){
+  public httpPost(url:string, form_data:FormData, options?:{})
+  {
     
     const OPTIONS = { 
       headers: {
