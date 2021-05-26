@@ -35,6 +35,13 @@ class Request
   /***********FACADES**********/
   /****************************/
 
+  public static function siteURL()
+  {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $domainName = $_SERVER['HTTP_HOST'].'/';
+    return $protocol.$domainName;
+  }
+
   /**
    * Retorna URI atual
    * @return mixed|string
@@ -82,11 +89,18 @@ class Request
    *
    * @return SessionManipulation|null
    */
-  public function session(){
+  public function session()
+  {
     return SessionManipulation::getInstance();
   }
 
-  public function post($input = null){
+  public function user()
+  {
+    return $this->session()->user();
+  }
+
+  public function post($input = null)
+  {
 
     if(!empty($_POST)){
 
@@ -113,21 +127,26 @@ class Request
    */
   public static function isAjax()
   {
-
+    
     /**
      * Check param HTTP_X_REQUESTED_WITH captured from SERVER PHP
      */
     $x_requested = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+
+    // dd(!empty($_SERVER['HTTP_X_REQUESTED_WITH']));
+
     if ( $x_requested )
     {
       # Ex. check the query and serve requested data
       return TRUE;
     }
 
+    $isCors = self::isCORS();
+
     /**
-     * Not Same origin agent/client and CORS mode enable
+     * Not Same origin agent/client Or CORS mode enable
      */
-    if(self::isSameOrigin() === FALSE && self::isCORS()){
+    if($isCors){
       return TRUE;
     }
 
@@ -144,7 +163,7 @@ class Request
    */
   public static function getHostname()
   {
-    return gethostbyaddr($_SERVER['REMOTE_ADDR']);
+    return gethostbyaddr($_SERVER['REMOTE_ADDR']) . self::baseUrl();
   }
 
   /**
@@ -157,13 +176,42 @@ class Request
     return gethostbyname(self::getHostname());
   }
 
+  /**
+   * Return if origin request is same
+   *
+   * @return boolean
+   */
   public static function isSameOrigin(){
 
+    /**
+     * if isset HTTP_ORIGIN -> Request is AJAX or CORS
+     * HTTP_REFERER show request from different origin
+     */
+    if(isset($_SERVER['HTTP_ORIGIN']) && ($_SERVER['HTTP_ORIGIN'] === $_SERVER['HTTP_REFERER']) ){
+      return TRUE;
+    }
+
+    /**
+     * In some cases, PHP captures this way
+     * !!It varies from server to server.!!
+     */
     if(!empty($_SERVER['HTTP_SEC_FETCH_SITE']) && strtolower($_SERVER['HTTP_SEC_FETCH_SITE']) === 'same-origin' ){
       return TRUE;
     }
 
-    return !empty($_SERVER['HTTP_ORIGIN']) && $_SERVER['SERVER_NAME'] !== self::getIp();
+    /**
+     * By default, when HTTP_ORIGIN is not defined 
+     * IS ALWAYS THE SAME ORIGIN OF REQUEST
+     */
+    if(!isset($_SERVER['HTTP_ORIGIN'])){
+      return TRUE;
+    }
+    
+    /**
+     * Is not same origin
+     */
+    return FALSE;
+
   }
 
   public static function getContentType(){
@@ -213,7 +261,15 @@ class Request
    */
   public static function getRouterMode()
   {
-    return Request::isAjax() ? 'api' : 'web';
+    $defaultMode = 'web';
+
+    if(Request::isAjax()){
+      $defaultMode = 'api';
+    } 
+
+
+
+    return $defaultMode;
   }
   
 

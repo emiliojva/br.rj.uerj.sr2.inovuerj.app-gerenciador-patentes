@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-
 use Core\Controller\ControllerAction;
-use Core\Router\Request;
 
 /**
  * Classe Controller para lidar com recursos dos ativos(Booty)
@@ -25,7 +23,7 @@ class IntellectualAssetController extends ControllerAction
      *
      * As variaveis que serão visiveis a view são passadas por array no segundo parametro
      */
-    return view('assets.index', []);
+    return $this->render('assets.index', []);
 
   }
 
@@ -37,7 +35,7 @@ class IntellectualAssetController extends ControllerAction
      *
      * As variaveis que serão visiveis a view são passadas por array no segundo parametro
      */
-    return view('assets.create', []);
+    return $this->render('assets.create', []);  
 
   }
 

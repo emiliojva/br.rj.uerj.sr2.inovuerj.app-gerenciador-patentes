@@ -1,0 +1,2 @@
+## O que é uma extensão .phtml ?
+Os arquivos com a extensão .phtml são mais comumente associados a páginas da Web PHP. Os arquivos PHTML contêm código PHP que é analisado por um mecanismo PHP. Isso permite que o servidor da web gere HTML dinâmico que é exibido em um navegador da web. Os arquivos PHTML são freqüentemente usados ​​para acessar bancos de dados. As páginas que contêm o código PHTML geralmente são exibidas com a extensão de página .php.

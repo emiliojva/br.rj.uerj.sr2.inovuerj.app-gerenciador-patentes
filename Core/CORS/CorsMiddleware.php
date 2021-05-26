@@ -8,8 +8,6 @@
 
 namespace Core\CORS;
 
-use mysql_xdevapi\Exception;
-
 Class CorsMiddleware
 {
 
@@ -187,7 +185,7 @@ Class CorsMiddleware
 
   }
 
-  public function setCacheControl($pragma)
+  public function setCacheControl($cache_control)
   {
     $this->_cache_control = $cache_control;
     return $this;
@@ -204,7 +202,7 @@ Class CorsMiddleware
   public function setContentLength($content_length)
   {
     if(!is_numeric($content_length)){
-      throw new Exception('Precisa ser um inteiro');
+      throw new \Exception('Precisa ser um inteiro');
     }
 
     $this->_content_length = $content_length;

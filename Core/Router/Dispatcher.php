@@ -56,6 +56,11 @@ class Dispatcher
     return $this->_router;
   }
 
+  public function getActiveRoute()
+  {
+    return $this->_active_route;
+  }
+
   /**
    * Executa o despachante mediante a captura do verbo http e array de rotas
    * Retornando `callback` e `params` encontrados
@@ -63,6 +68,7 @@ class Dispatcher
    */
   public function run()
   {
+    
     $result = NULL;
 
     /**
@@ -71,12 +77,15 @@ class Dispatcher
      */
     $http_method = $this->_request->getMethod();
 
+    
+
     /**
      * Pegar conjunto de rotas de acordo com metodo http atual
      */
     $arrayAllRoutesByMethod = Router::getAllByMethod($http_method);
 
-    
+  
+
 
     /**
      * Iterar por cada rota do metodo http atual

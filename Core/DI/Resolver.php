@@ -49,7 +49,7 @@ class Resolver
     foreach ($parameters as $parameter){
       $reflectionNamedType = $parameter->getType();
 
-      if( $reflectionNamedType->getName() === "Core\Router\Request" ){
+      if( !is_null($reflectionNamedType) && ($reflectionNamedType->getName() === "Core\Router\Request") ){
         $dependencyClassName = (string)$reflectionNamedType->getName();
         $dependencies[] = new $dependencyClassName();
       }
@@ -89,7 +89,7 @@ class Resolver
       $dependency = $parameter->getClass();
 
       if ($dependency) {
-        $dependencies[] = $this->class($dependency->name, $this->dependencies);
+        $dependencies[] = $this->byClass($dependency->name, $this->dependencies);
       } else {
         $dependencies[] = $this->getDependencies($parameter);
       }

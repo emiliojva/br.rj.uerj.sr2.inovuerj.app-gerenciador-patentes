@@ -33,7 +33,8 @@ class AdminController extends ControllerAction
       'usuario_autenticado' => $usuario_autenticado
     );
 
-    return view('admin.index', $dados);
+    return $this->render('admin.index', $dados);
+    
 
   }
 

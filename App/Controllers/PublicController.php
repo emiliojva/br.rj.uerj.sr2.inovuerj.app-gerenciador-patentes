@@ -9,7 +9,6 @@ class PublicController extends ControllerAction
 
   public function home()
   {
-
     session_start();
 
     /**
@@ -18,7 +17,9 @@ class PublicController extends ControllerAction
      *
      * As variaveis que serão visiveis a view são passadas por array no segundo parametro
      */
-    return view('home.index', []);
+    
+    return $this->render('home.index',['name'=>'emilio']);
+    // return view('home.index', []);
 
   }
 

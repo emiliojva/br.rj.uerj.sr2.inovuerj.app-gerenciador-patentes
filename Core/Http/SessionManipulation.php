@@ -96,7 +96,7 @@ final class SessionManipulation
 
   /**
    * Retornar um usuario autenticado
-   * @return array
+   * @return array|null
    */
   public static function getUser($with_array = false)
   {
@@ -105,10 +105,10 @@ final class SessionManipulation
 
     if (isset($_SESSION['user_data']['logged']) && is_numeric($_SESSION['user_data']['id'])) {
       $array_user_data = $_SESSION['user_data'];
+      return !$with_array ? (object)$array_user_data : $array_user_data ;
     }
 
-    return !$with_array ? (object)$array_user_data : $array_user_data ;
-
+    return null;
   }
 
   /**

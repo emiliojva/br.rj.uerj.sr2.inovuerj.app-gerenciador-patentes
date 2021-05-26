@@ -10,7 +10,10 @@ namespace Core;
 
 use Core\CORS\CorsMiddleware;
 use Core\DI\Resolver;
+use Core\Interfaces\IGlobal;
+use Core\Interfaces\TemplateEngineInterface;
 use Core\Renderer\PHPRendererInterface;
+use Core\Router\Dispatcher;
 use Core\Router\Request;
 use Core\Router\Router;
 
@@ -20,7 +23,7 @@ class App
   /**
    * Depachante.
    * Camada responsavel por delegar controle das rotas e requisicoes
-   * @property Dispatcher
+   * @property Dispatcher \Core\Router\Dispatcher
    */
   private $_dispatcher;
 
@@ -34,6 +37,12 @@ class App
    */
   private $renderer;
 
+  /**
+   * @property \Core\Controller\ControllerViewEngine
+   */
+  private $template_engine;
+
+  private static $instance = null;
 
   /**
    * controller default que possui settings de comportamento dos demais
@@ -43,8 +52,14 @@ class App
   private $controller_default = 'PublicController';
   private $pageNotFoundAction = 'pageNotFound';
 
-  public function __construct()
+  /**
+   * __contructor
+   * @return App
+   */
+  public function __construct(PHPRendererInterface $renderer, \Core\Controller\ControllerViewEngine $template_engine)
   {
+    $this->renderer = $renderer;
+    $this->template_engine = $template_engine->getTemplateEngineInstance();
 
     /**
      * Carregando Helpers/Ajudantes
@@ -62,6 +77,14 @@ class App
      */
     $this->_dispatcher = new \Core\Router\Dispatcher();
 
+    self::$instance = $this;
+
+  }
+
+  public function __callStatic($method, $arguments)
+  {
+    if(self::$instance)
+      self::$instance->{$method}(...$arguments);
   }
 
   public function setControllerPageNotFoundAction($controller, $action)
@@ -125,6 +148,15 @@ class App
     return $this;
   }
 
+  public function setTemplateEngine(\Core\Controller\ControllerViewEngine $template_engine){
+    $this->template_engine = $template_engine->getTemplateEngineInstance();;
+    return $this;
+  }
+
+  public function getTemplateEngine(){
+    return $this->template_engine;
+  }
+
   /**
    * Endpoint da aplicação.
    *
@@ -168,6 +200,10 @@ class App
            * @see https://php-di.org/doc/understanding-di.html
            */
           $resolver = new Resolver();
+          
+          /**
+           * @var $instanceController \Core\Controller\ControllerAction
+           */
           $instanceController = $resolver->byClass($class);
 
           /**
@@ -186,7 +222,14 @@ class App
            *  Observem que os parametros são do tipo array e estão sendo combinados
            *  Exemplo de união de arrays com sinal '+'
            */
-          $params = $method_dependencies + $params;
+          $params = array_merge($method_dependencies, $params);
+
+          // dd($this->getTemplateEngine());
+          $instanceController->setTemplateEngine($this->getTemplateEngine());
+          $instanceController->controller_name    = $class;
+          $instanceController->controller_action  = $method;
+          $instanceController->active_route       = $this->_dispatcher->getActiveRoute();
+          // dd($instanceController);
 
           /**
            * Invocando metodos dinamicamente e passando parametros resolvidos e da requisição(GET,POST, ETC).
@@ -286,5 +329,14 @@ class App
     }
 
   }
+  
+  public static function get($method = null, array $args = [])
+  {
+    if(!is_null($method)){
+      return call_user_func_array([self::$instance,$method],$args);
+    }
 
+    return self::$instance;
+    
+  }
 }

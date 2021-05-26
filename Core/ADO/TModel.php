@@ -3,13 +3,6 @@
 namespace Core\ADO;
 
 use Core\Http\SessionManipulation;
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-
-// Set the event dispatcher used by Eloquent models... (optional)
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-
 abstract class TModel extends \Illuminate\Database\Eloquent\Model {
   
   /**
@@ -21,8 +14,6 @@ abstract class TModel extends \Illuminate\Database\Eloquent\Model {
   public function __construct(){
 
     parent::__construct();
-
-    $this->connection();
 
   }
 
@@ -67,32 +58,6 @@ abstract class TModel extends \Illuminate\Database\Eloquent\Model {
 
   }
 
-  private function connection()
-  {
-    $capsule = new Capsule;
-
-    $capsule->addConnection([
-        'driver'    => 'mysql',
-        'host'      => 'localhost',
-        'database'  => 'inovuerj_processos',
-        'username'  => 'emilio',
-        'password'  => '1234',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-        'strict'    => false
-    ]);
-
-    // Events drive eloquent
-    $capsule->setEventDispatcher(new Dispatcher(new Container));
-
-    // Make this Capsule instance available globally via static methods... (optional)
-    $capsule->setAsGlobal();
-
-    // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-    $capsule->bootEloquent();
-
-  }
 
   /**
    * @return mixed
@@ -111,18 +76,23 @@ abstract class TModel extends \Illuminate\Database\Eloquent\Model {
   public function save(array $options = []){
 
     /**
-     * get last id max 
+     * get last id max for store new record
      */
-    $this->attributes['id'] = (int)self::latest()->first()->id + 1;
+    if(!$this->attributes['id']){
+      $this->attributes['id'] = (int)self::latest()->first()->id + 1;
+    }
+    
 
     /**
      * created by
+     * default admin (id = 1)
      */
     if(is_null($this->created_user_id)){
-      $this->attributes['created_user_id'] = SessionManipulation::getInstance()->user()->id;;
+      $userLogged = SessionManipulation::getInstance()->user();
+      $this->attributes['created_user_id'] = $userLogged ? $userLogged->id : 1;
     }
 
-    parent::save($options);
+    return parent::save($options);
 
   }
 
