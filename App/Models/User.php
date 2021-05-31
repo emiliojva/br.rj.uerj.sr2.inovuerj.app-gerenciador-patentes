@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\ADO\TDatabase;
 use Core\ADO\TModel;
 use Core\ADO\TTransaction;
 
@@ -29,30 +30,11 @@ class User extends TModel
   public function auth()
   {
 
-    /**
-     * Abre uma conexao com banco e executa comando de transação 'begin'
-     */
-    TTransaction::open();
+    $result = self::where('email',$this->email)->first();
 
-    /**
-     * @var $conexao \PDO
-     */
-    $conexao = TTransaction::get();
-
-    $statement = $conexao->prepare("select id,email,password from {$this->table} where email = :email");
-
-    $statement->execute(
-      array(
-        'email' => $this->email,
-      )
-    );
-
-    $result = $statement->fetch(\PDO::FETCH_ASSOC);
-
-    /**
-     * Encerra bloco de transação entre o TTransaction::open e executa comando de encerramento de transação 'commit()'
-     */
-    TTransaction::close();
+    if($result){
+      $result = $result->toArray();
+    }
 
     /**
      * Valida se foi encontrado email no retorno da Transaction

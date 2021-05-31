@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Core\ADO\TDatabase;
-use Core\ADO\TTransaction;
 use Core\Controller\ControllerAction;
 use Core\Router\Request;
 
@@ -39,7 +38,6 @@ class AuthenticationController extends ControllerAction
      */
     $email = null;
     $senha = null;
-
    
     /**
      * Verifica se a variavel global POST possui os campos usuario e senha preechidos
@@ -59,14 +57,11 @@ class AuthenticationController extends ControllerAction
      */
     session_start();
 
-    // phpinfo();
-    // die('aasas');
     /**
      * Abre uma conexao db e executa o comando begin do banco de dados escolhido (ex: mysql)
      */
     // TTransaction::open();
     TDatabase::beginTransaction();
- 
 
     /**
      * Instancia de um objeto usuario
@@ -74,6 +69,7 @@ class AuthenticationController extends ControllerAction
     $usuario = new User();
     $usuario->setEmail($email);
     $usuario->setPassword($senha);
+    
 
     /**
      * Valida se usuario foi autenticado
