@@ -38,8 +38,6 @@ final class TDatabase
 
         if(!self::$instance){
 
-            
-
             /**
              * @var $capsule \Illuminate\Database\Capsule\Manager
              */

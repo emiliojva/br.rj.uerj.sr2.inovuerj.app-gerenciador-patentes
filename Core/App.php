@@ -58,19 +58,13 @@ class App
    */
   public function __construct(PHPRendererInterface $renderer, \Core\Controller\ControllerViewEngine $template_engine)
   {
-    $this->renderer = $renderer;
-    $this->template_engine = $template_engine->getTemplateEngineInstance();
-
     /**
      * Carregando Helpers/Ajudantes
      */
     require_once 'Helpers/functions.helpers.php';
 
-    /**
-     * Codificacao charset default
-     */
-    // @header('Content-Type: text/html; charset=UTF-8'); # LIB EMERGENCIAL PARA UTF-8 https://github.com/neitanod/forceutf8
-
+    $this->renderer = $renderer;
+    $this->template_engine = $template_engine->getTemplateEngineInstance();
 
     /**
      * Manipulador da Camada Dispatcher()

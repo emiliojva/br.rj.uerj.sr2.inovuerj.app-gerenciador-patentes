@@ -11,10 +11,15 @@ class ControllerViewEngine implements TemplateEngineInterface
   private $path_views = "";
   private $template_engine_instance = null;
 
-  public function __construct($template_engine, $path_views)
+  public function __construct($template_engine_class, $path_views)
   {
-    $this->template_engine = $template_engine;
+    $this->template_engine = $template_engine_class;
     $this->path_views = $path_views;
+
+    if(!class_exists($template_engine_class)){
+      $namespace = addslashes($template_engine_class);
+      throw new \Exception("Class {$namespace} not exists");
+    }
 
     $this->template_engine_instance = new $this->template_engine($this->path_views);
 
