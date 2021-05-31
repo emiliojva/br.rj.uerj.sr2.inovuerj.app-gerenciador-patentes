@@ -38,6 +38,8 @@ final class TDatabase
 
         if(!self::$instance){
 
+            
+
             /**
              * @var $capsule \Illuminate\Database\Capsule\Manager
              */
@@ -46,11 +48,11 @@ final class TDatabase
             self::$instance = $capsule;
 
             $capsule->addConnection([
-                'driver'    => 'mysql',
-                'host'      => 'localhost',
-                'database'  => 'inovuerj_processos',
-                'username'  => 'emilio',
-                'password'  => '1234',
+                'driver'    => $_ENV['DB_CONNECTION'],
+                'host'      => $_ENV['DB_HOST'],
+                'database'  => $_ENV['DB_DATABASE'],
+                'username'  => $_ENV['DB_USERNAME'],
+                'password'  => $_ENV['DB_PASSWORD'],
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci',
                 'prefix'    => '',

@@ -21,12 +21,17 @@
 require_once '../vendor/autoload.php';
 
 /**
+ * Starts Config to .env engine
+ */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();
+
+/**
  * Execucao do despachante.
  * Responsavel por captura e executacao das rotas encontradas
  *
  * (new class())->method() - Forma alternativa de, auto instanciar e executar um método
  */
-
 $renderer = new \Core\Renderer\PHPRenderer(); # Renderizador Web(text/html) ou Api(application/json)
 $controller_view_engine = new \Core\Controller\ControllerViewEngine('\League\Plates\Engine', '../App/Views'); # Controlador de Engine Views
 

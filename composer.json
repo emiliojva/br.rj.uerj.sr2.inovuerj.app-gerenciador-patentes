@@ -24,7 +24,8 @@
     "php-curl-class/php-curl-class": "8.9.3",
     "psr/http-message": "^1.0",
     "shuchkin/simplexlsx": "dev-master",
-    "symfony/var-dumper": "^3.4"
+    "symfony/var-dumper": "^3.4",
+    "vlucas/phpdotenv": "4.2"
   },
   "autoload": {
     "psr-4": {
@@ -32,7 +33,5 @@
       "Core\\":"Core/",
       "Config\\":"Config/"
     }
-  },
-  "require-dev": {
   }
 }
