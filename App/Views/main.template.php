@@ -8,24 +8,19 @@
     <!--    <title>Projeto Novo</title>-->
     <title><?= $this->e($title) ?></title>
 
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/grid.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsivo.css">
-
   </head>
 
   <body>
 
     <!-- Header -->
     <header class="header">
-      <div class="header-texto container">
+      <div class="header-texto container-16">
         <h1>Gerenciador de Processos e Ativos Intelectuais</h1>
       </div>
     </header>
 
     <!-- Conteúdo -->
-    <div class="corpo-home container" id="corpo-home">
+    <div class="corpo-home  container-16" id="corpo-home">
         <?= $this->section('content') ?>
     </div>
 

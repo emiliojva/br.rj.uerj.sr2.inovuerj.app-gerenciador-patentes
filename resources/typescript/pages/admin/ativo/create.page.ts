@@ -4,7 +4,7 @@ import EventManager from '../../../services/event-manager';
 import axios from "axios";
 import * as $ from "jquery";
 import "jquery-mask-plugin";
-import { Form } from '../../_forms/form';
+import { Form, FormInputValue } from '../../_forms/form';
 import { ApiService } from '../../../services/api.service';
 
 
@@ -62,9 +62,8 @@ export class CreatePage extends ControllerPage {
       .setAction('/admin/ativo')
       .onSubmit( (formData: FormData) => {
         this.apiService.postToIntellectualAssetStore(formData).then( (response) => {
-          console.log(response)
-          alert('ois')
-          this.formBasicInformation.setInputHiddenId( response.id );
+          this.formBasicInformation.setInputHiddenId( 'data[intellectual_assets][id]' , response.id );
+          window.location.replace(`/admin/ativo/${response.id}/edit`);
         });
       });
   }
@@ -79,8 +78,25 @@ export class CreatePage extends ControllerPage {
       .setMethod('post')
       .setAction('/admin/ativo')
       .onSubmit( (formData: FormData) => {
-        // this.formBasicInformation.()
+
+        const input_id: FormInputValue = this.formBasicInformation.getInputHiddenId() || null;
+
+        if(!input_id){
+          alert('Form Registration Number required!');
+          this.formBasicInformation.focusIn('#nome_ativo');
+          return false;
+        }
+
+        /**
+         * Setter input[name] and input[value] to Form do update
+         */
+        formData.set( input_id.name , input_id.value.toString() );
+
+        /**
+         * Post data to api persister 
+         */
         this.apiService.postToIntellectualAssetStore(formData);
+        
       });
   }
 

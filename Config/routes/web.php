@@ -82,7 +82,7 @@ Router::get('/admin/ativo','IntellectualAssetController@index');              # 
 Router::get('/admin/ativo/create','IntellectualAssetController@create');      # Formulario Novo Ativo
 // Router::post('/admin/ativo','Api\IntellectualAssetController@store');         # Post para Form Novo Ativo
 // Router::get('/admin/ativo/{id}','IntellectualAssetController@show');          # Formulario Editar Ativo
-// Router::get('/admin/ativo/{id}/edit','IntellectualAssetController@edit');     # Formulario Editar Ativo
+Router::get('/admin/ativo/{id}/edit','IntellectualAssetController@edit');     # Formulario Editar Ativo
 // Router::post('/admin/ativo/{id}/edit','IntellectualAssetController@update');  # Post/Put para Form Editar Ativo
 // Router::post('/admin/ativo/{id}','IntellectualAssetController@destroy');      # Deletar/Destroy Ativo
 

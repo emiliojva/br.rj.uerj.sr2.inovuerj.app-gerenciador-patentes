@@ -2,9 +2,11 @@
 
 namespace App\Controllers\Api;
 
+use App\Models\Author;
 use Core\Controller\ControllerAction;
 use Core\Router\Request;
 use App\Models\IntellectualAsset;
+use App\Models\IntellectualAssetHasAuthor;
 use Core\ADO\TDatabase as DB;  
 
 /**
@@ -41,9 +43,6 @@ class IntellectualAssetController extends ControllerAction
       ]
     ];
 
-    
-    
-
     return $this->_save($request, $array_params);
 
   }
@@ -52,7 +51,7 @@ class IntellectualAssetController extends ControllerAction
   {
 
     try {
-
+      
       /**
        * Only Logged Users
        */
@@ -136,5 +135,102 @@ class IntellectualAssetController extends ControllerAction
     }
 
   }
+
+  public function associateAuthor(Request $request, $intellectual_assset_id)
+  {
+
+    try {
+    /**
+       * Only Logged Users
+       */
+      if($request->user()){
+
+        /**
+         * Database transaction persistence flow
+         * DB::begin()     # Starter connection with database and begins persistence ! 
+         */
+        DB::begin(); # Start transaction session with database
+
+        /**
+         * @var $intellectualAsset IntellectualAsset
+         */
+        $intellectualAsset = new IntellectualAsset($intellectual_assset_id);
+
+
+        /**
+         * Create Author Persistence
+         * @var $author \App\Models\Author
+         */
+        $author = new Author();
+        $author->fromArray($request->post('data.author'));
+        $author->save();
+
+        $intellectual_asset_has_author = new IntellectualAssetHasAuthor();
+        $intellectual_asset_has_author->fill([
+          'intellectual_assets_id'  =>  $intellectual_assset_id, 
+          'authors_id'              =>  $author->id
+        ]);
+
+        $result = $intellectual_asset_has_author->save();
+
+        /**
+         * Database transaction persistence flow commit
+         * DB::commit()     # Write persistence into database case success! 
+         */
+        DB::commit(); 
+
+        /**
+         * If successful, return record persisted
+         */
+        if($result){
+          
+          return [
+            '_body' =>  IntellectualAssetHasAuthor::last()->toArray(),
+            'msg'   =>  "Author are associated to Intellectual Asset"
+          ];
+
+        }
+        
+      } else {
+
+         /**
+         * Error thrown not authorized
+         */
+        http_response_code(401);
+        throw new \Exception('User not logged');
+
+      } 
+
+    } catch (\Exception $e){
+
+      /**
+       * Database transaction persistence flow
+       * DB::rollback();  # Cancel persistence into database case success!
+       */
+      DB::rollback(); # Undo persistence into database case success!
+
+      $sql = "";
+      $message = $e->getMessage();
+
+      /**
+       * Capture SQL statememnt 
+       */
+      $pattern = '/\(SQL:(.*)\)/';
+      preg_match($pattern, $message, $output_array);
+      $message_error = preg_replace($pattern,'',$message );
+      if(isset($output_array[1])){
+        $sql = $output_array[1];
+      }
+
+      return [
+        '_body' =>  [],
+        // 'msg'   =>  $params['messages']['exception'],
+        'error' =>  [ 'code'=>$e->getCode(), 'message'=>$message_error, 'SQL'=> $sql ]
+      ];
+      
+    }
+  }
+  
+
 
 }

@@ -1,16 +1,20 @@
+/**
+ * SIGA O SEGUINTE PADRÃO PARA LIDAR COM O JAVASCRIPT(TS) DAS PÁGINAS WEB(PHP)
+ * 
+ * Crie dentro do caminho "/resources/typescript/pages/" o exato caminho existente na rota. 
+ * Ex: Se a rota atual é "http://127.0.0.1/admin/ativo/create" 
+ * Crie o caminho /resources/typescript/pages/admin/ativo/create.page.ts
+ * 
+ * Parametros são desconsiderados ex: "http://127.0.0.1/admin/ativo/1/edit".
+ * Parametro "/1" será excluído e a criação será "/resources/typescript/pages/admin/ativo/edit.page.ts"
+ * 
+ */
+import "../sass/_main.scss";
+
+
 import EventManager from './services/event-manager'
 import { ControllerPage } from './models/controller-page';
 import { UtilsService } from './services/utils.service';
-
-// import * as $ from "jquery";
-// declare var jquery: any;
-// declare var $: any;
-
-
-// export const RegisteredControllers: any = {
-//   PublicController
-// }
-
 export class Main {
 
   constructor(private eventManager: EventManager)
@@ -48,10 +52,11 @@ export class Main {
 
     /**
      * string caminho completo da Page
+     * removendo params
      * @exemplo /pages/admin/
      * @param module_path 
      */
-    let module_path:string  = route_current.replace(/([a-zA-Z]+)$/,'');
+    let module_path:string  = route_current.replace(/([a-zA-Z]+)$/,'').replace(/[0-9]+\//ig,'');
 
     /**
      * Nome da classe do modulo
@@ -81,4 +86,7 @@ export class Main {
  
 }
 
+/**
+ * Main Page with control events as dependencie
+ */
 new Main( new EventManager() );

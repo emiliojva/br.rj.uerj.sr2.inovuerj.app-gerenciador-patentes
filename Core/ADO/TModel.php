@@ -11,9 +11,13 @@ abstract class TModel extends \Illuminate\Database\Eloquent\Model {
    */
   protected $_from_array = [];
 
-  public function __construct(){
+  public function __construct($id = null){
 
     parent::__construct();
+
+    if($id){
+      $this->fromArray(self::find($id)->toArray());
+    }
 
   }
 

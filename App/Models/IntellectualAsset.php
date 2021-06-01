@@ -1,7 +1,7 @@
 <?php
 
 /**
- * App\models\IntellectualAsset
+ * App\Models\IntellectualAsset
  *
  * @property int $id
  * @property string $name
@@ -25,9 +25,20 @@ class IntellectualAsset extends TModel
   protected $summary;
   protected $intellectual_assets_types_id;
 
-  public function __construct()
+  public static $types = [
+    "1"=>  "Patente",
+    "2"=>  "Modelo de Utilidade",
+    "3"=>  "Desenho Industrial",
+    "4"=>  "Programa de Computador",
+    "5"=>  "Direito Autoral",
+    "6"=>  "Marca",
+  ];
+
+  
+
+  public function __construct($id = null)
   {
-    parent::__construct();
+    parent::__construct($id);
   }
 
   /**

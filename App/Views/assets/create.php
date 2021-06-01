@@ -38,17 +38,17 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 
 				<section class='control'>
 					<label for="numero">Numero:</label><br>
-					<input class="texto" type="text" name="numero" id="numero" required><br><br>
+					<input class="texto" type="text" name="data[intellectual_assets][registration_number]" id="numero" required><br><br>
 				</section>
 
 				<section class='control'>
 					
 					<label>Agencia de Proteção:</label><br><br>
 
-					<input class="radio" type="radio" name="ag_protecao" value="inpi">
+					<input class="radio" type="radio" name="data[intellectual_assets][protection_agency_inpi]" value="inpi">
 					<label class="radio_label" for="inpi">INPI</label>
 
-					<input class="radio" type="radio" name="ag_protecao" value="bib_nacional">
+					<input class="radio" type="radio" name="data[intellectual_assets][protection_agency_inpi]" value="bib_nacional">
 					<label class="radio_label" for="bib_nacional">Biblioteca Nacional</label>
 
 				</section>
