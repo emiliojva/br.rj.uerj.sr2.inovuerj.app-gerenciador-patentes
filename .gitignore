@@ -9,4 +9,8 @@ composer.lock
 composer_2.phar
 Config/database/my_db.ini
 public/uploads/
+public/dist/
 .history
+.bak
+#private/DB/modelagem_uml_entidade_relacionamentos.mwb.bak
+package-lock.json

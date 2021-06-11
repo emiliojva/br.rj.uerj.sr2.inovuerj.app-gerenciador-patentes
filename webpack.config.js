@@ -1,54 +1,42 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require( 'fork-ts-checker-webpack-plugin' );
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // entry: './src/index.js',
   mode: 'development', // or 'production',
 
-  entry: './resources/typescript/main.ts',
+  entry: './resources/index.js',
 
   devtool: 'inline-source-map',
 
   output: {
     // filename: 'main.js',
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public/js/dist'),
+    path: path.resolve(__dirname, 'public/dist'),
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".json"],
+    extensions: [".tsx", ".ts", ".js"],
   },
 
   module: {
     rules: [
       {
-        test: /\.(scss)$/,
-        use: [{
-          // inject CSS to page
-          loader: 'style-loader'
-        }, {
-          // translates CSS into CommonJS modules
-          loader: 'css-loader'
-        }, {
-          // Run postcss actions
-          loader: 'postcss-loader',
-          options: {
-            // `postcssOptions` is needed for postcss 8.x;
-            // if you use postcss 7.x skip the key
-            postcssOptions: {
-              // postcss plugins, can be exported to postcss.config.js
-              plugins: function () {
-                return [
-                  require('autoprefixer')
-                ];
-              }
-            }
-          }
-        }, {
-          // compiles Sass to CSS
-          loader: 'sass-loader'
-        }]
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
+            : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
       },
       {
         test: /\.tsx?$/,
@@ -63,10 +51,6 @@ module.exports = {
         },
       },
       // {
-      //   test: /\.css$/i,
-      //   use: ['style-loader','css-loader']
-      // },
-      // {
       //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
       //   type: 'asset/resource',
       // },
@@ -75,7 +59,14 @@ module.exports = {
   
   // plugins
   plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
     new ForkTsCheckerWebpackPlugin(), // run TSC on a separate thread
+    
     // new webpack.ProvidePlugin({
     //   $: 'jquery',
     //   jQuery: 'jquery',
