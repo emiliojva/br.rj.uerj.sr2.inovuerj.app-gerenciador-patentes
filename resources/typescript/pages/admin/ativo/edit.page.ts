@@ -131,6 +131,44 @@ export class EditPage extends ControllerPage {
 
     const modal:any = document.querySelector(`#${EditPage.boxFormAuthorModalTokenId}`);
 
+    const dropArea = document.querySelector('.dropzone');
+    const fileSelector = document.querySelector('.dropzone #file-selector');
+
+    console.log(fileSelector);
+    fileSelector.addEventListener('change', ( event: any ) => {
+      const fileList = event.target.files;
+      console.log(fileList);
+      listFiles(fileList);
+    });
+
+    dropArea.addEventListener('dragover', (event: Event & { dataTransfer?: DataTransfer } ) => {
+      event.stopPropagation();
+      event.preventDefault();
+      // Style the drag-and-drop as a "copy file" operation.
+      event.dataTransfer.dropEffect = 'copy';
+    });
+    
+    dropArea.addEventListener('drop', (event: Event & { dataTransfer?: DataTransfer }) => {
+      event.stopPropagation();
+      event.preventDefault();
+      const fileList:FileList = event.dataTransfer.files;
+      listFiles(fileList);
+    });
+
+    function listFiles(fileList:FileList){
+      
+      const ul = dropArea.querySelector('.dropzone-list ul')
+      // Read the File objects in this FileList.
+      for (var i = 0; i<fileList.length; i++) {
+        const f = fileList[i];
+        const p = document.createElement('p');
+        p.innerHTML = `${f.name} <span>x</span>`;
+        ul.appendChild(p);
+      }     
+      console.log(fileList);
+
+    }
+
     
     /**
      * Registration Number Form Instance
@@ -146,7 +184,7 @@ export class EditPage extends ControllerPage {
       .setMethod('post')
       .setAction(`/admin/ativo/${asset_id}/author`)
       .onSubmit( (formData: FormData) => {
-
+        
         const input_id: FormInputValue = this.formBasicInformation.getInputHiddenId() || null;
         if(!input_id){
           alert('Form Registration Number required!');
@@ -158,7 +196,27 @@ export class EditPage extends ControllerPage {
          * Post data to api persister 
          */
         this.apiService.postToIntellectualAssetAuthorStore(asset_id,this.formAuthor).then( (result)=>{
-          console.log(result);
+          const new_author = result;
+          const tr_new_author = `
+            <tr>
+              <th scope="row">${new_author.id}</th>
+              <td>${new_author.individual.name}</td>
+              <td>${new_author.titration}</td>
+              <td>${new_author.academic_unit}</td>
+            </tr>`;
+
+          /**
+           * Append text TR as Node into table>tbody 
+           */
+          $('.box-list-author')
+            .show()
+            .find(' > table > tbody').append(tr_new_author);
+
+          /**
+           * Cleaner form
+           */
+          this.formAuthor.element.reset();
+
           /**
            * hide modal
            */
@@ -178,7 +236,7 @@ export class EditPage extends ControllerPage {
    * @param modal 
    * @param formDom 
    */
-  private modalAttachButtonSave(modal, formDom: Form)
+  private modalAttachButtonSave(modal:any, formDom: Form)
   {
     /**
      * Fetch button save into modal-footer
@@ -212,6 +270,7 @@ export class EditPage extends ControllerPage {
   private masks(){
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.cnpj').mask('00.000.000/0000-00');
+    $('.phone').mask('(00)000000000');
   }
 
   public httpPost(url:string, form_data:FormData, options?:{})

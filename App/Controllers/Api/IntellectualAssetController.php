@@ -17,6 +17,7 @@ class IntellectualAssetController extends ControllerAction
 
   public function __construct(){
     session_start();
+    
   }
 
   public function store(Request $request)
@@ -179,13 +180,16 @@ class IntellectualAssetController extends ControllerAction
          */
         DB::commit(); 
 
+        $body = $author->toArray();
+        $body['individual'] = $author->individual->toArray();
+
         /**
          * If successful, return record persisted
          */
         if($result){
           
           return [
-            '_body' =>  IntellectualAssetHasAuthor::last()->toArray(),
+            '_body' =>  $body,
             'msg'   =>  "Author are associated to Intellectual Asset"
           ];
 

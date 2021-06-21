@@ -9,9 +9,6 @@
  * Parametro "/1" será excluído e a criação será "/resources/typescript/pages/admin/ativo/edit.page.ts"
  * 
  */
-import "../sass/_main.scss";
-
-
 import EventManager from './services/event-manager'
 import { ControllerPage } from './models/controller-page';
 import { UtilsService } from './services/utils.service';

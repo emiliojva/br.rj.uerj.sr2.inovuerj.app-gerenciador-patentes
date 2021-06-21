@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <script src="<?php echo siteUrl(); ?>js/dist/bundle.js"></script>
+    <script src="<?php echo siteUrl(); ?>dist/bundle.js"></script>
 
     <!-- JavaScript -->
     <!-- Carregamento no módulo requireJS -->

@@ -24,4 +24,9 @@ class IntellectualAssetHasAuthor extends TModel
   {
     parent::__construct($id);
   }
+
+  public function author()
+  {
+    return $this->belongsTo('App\Models\Author','authors_id');
+  }
 }

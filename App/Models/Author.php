@@ -40,5 +40,14 @@ class Author extends TModel
     parent::save(); 
 
   }
+
+  /**
+   * Author is composed by one individual
+   *
+   * @return void
+   */
+  public function individual(){
+    return $this->belongsTo('App\Models\Individual','id');
+  }
  
 }

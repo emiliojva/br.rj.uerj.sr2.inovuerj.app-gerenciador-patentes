@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Author;
 use App\Models\IntellectualAsset;
+use App\Models\IntellectualAssetHasAuthor;
 use Core\ADO\TDatabase;
 use Core\Controller\ControllerAction;
 
@@ -46,6 +48,7 @@ class IntellectualAssetController extends ControllerAction
 
     TDatabase::begin();
     $asset_instance =  IntellectualAsset::find($id);
+    $intellectuals_authors = IntellectualAssetHasAuthor::where('intellectual_assets_id',$id)->get();
     $types = IntellectualAsset::$types;
     TDatabase::commit();
 
@@ -55,7 +58,7 @@ class IntellectualAssetController extends ControllerAction
      *
      * As variaveis que serão visiveis a view são passadas por array no segundo parametro
      */
-    return $this->render('assets.edit', compact(['asset_instance','types']));  
+    return $this->render('assets.edit', compact(['asset_instance','types','intellectuals_authors']));  
 
   }
 

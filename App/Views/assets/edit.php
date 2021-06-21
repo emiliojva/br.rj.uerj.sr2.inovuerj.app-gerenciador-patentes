@@ -65,6 +65,32 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 
 	<h2>Autores</h2>
 
+	<!-- Box Hide - Show list with authors if exists array data -->
+	<div class='box-list-author' <?php if(count($intellectuals_authors)==0) echo "style='display:none'" ?>>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Titulação</th>
+					<th scope="col">Unidade Academica</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterate into table associaded intellectuals_authors -->
+				<?php foreach ($intellectuals_authors as $instance): ?>
+					<tr>
+						<th scope="row"><?=$instance->author->id ?></th>
+						<td><?=$instance->author->individual->name ?></td>
+						<td><?=$instance->author->titration ?></td>
+						<td><?=$instance->author->academic_unit ?></td>
+					</tr>
+				<?php endforeach; ?>
+				<!-- space reserved to list authores by typescript flow in /admin/assets/create.page.ts -->
+			</tbody>
+		</table>
+	</div>
+
 	<!-- Modal autores-->
 	<div class="modal fade" id="box-form-author-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -77,22 +103,24 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 				
 					<form>
 						<label for="nome_autor">Nome:</label><br>
-						<input class="texto" type="text" name="data[author][individual][name]" id="nome_autor"><br><br>
+						<input class="texto" type="text" name="data[author][individual][name]" id="nome_autor" required><br><br>
 
 						<label for="email_autor">Email:</label><br>
-						<input class="texto" type="email" name="data[author][individual][email]" id="email_autor"><br><br>
+						<input class="texto" type="email" name="data[author][individual][email]" id="email_autor" required><br><br>
 
 						<label for="tel_autor">Telefone:</label><br>
-						<input class="texto" type="number" name="data[author][individual][phone]" id="tel_autor"><br><br>
+						<input class="texto phone" type="tel" name="data[author][individual][phone]" id="tel_autor" 
+       placeholder="(21)999999999" pattern="\([0-9]{2}\)[0-9]{8,9}" value='21 ' required><br><br>
 
 						<label for="rg_autor">RG:</label><br>
-						<input class="texto rg" type="text" name="data[author][individual][document_number_rg]" id="rg_autor"><br><br>
+						<input class="texto rg" type="text" name="data[author][individual][document_number_rg]" id="rg_autor" pattern="[0-9]{8,14}" required><br><br>
 
 						<label for="cpf_autor">CPF:</label><br>
-						<input class="texto cpf" type="text" name="data[author][individual][document_number_cpf]" id="cpf_autor"><br><br>
+						<input class="texto cpf" type="text" name="data[author][individual][document_number_cpf]" id="cpf_autor" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" \
+			title="CPF xxx.xxx.xxx-xx" required><br><br>
 
 						<label for="end_autor">Endereço:</label><br>
-						<input class="texto" type="text" name="data[author][individual][address]" id="end_autor"><br><br>
+						<input class="texto" type="text" name="data[author][individual][address]" id="end_autor" required><br><br>
 
 						<label for="centro_autor">Centro:</label><br>
 						<input class="texto" type="text" name="data[author][center]" id="centro_autor"><br><br>
@@ -101,10 +129,10 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 						<input class="texto" type="text" name="data[author][academic_unit]" id="ua_autor"><br><br>
 
 						<label for="mat_autor">Matricula:</label><br>
-						<input class="texto" type="number" name="data[author][registration]" id="mat_autor"><br><br>
+						<input class="texto" type="number" name="data[author][registration]" id="mat_autor" required><br><br>
 
 						<label>Tipo de Vinculo:</label><br>
-						<select name="data[author][authors_bond_types_id]">
+						<select name="data[author][authors_bond_types_id]" required>
 							<option value="1">Servidor Docente</option>
 							<option value="2">Servidor Técnico</option>
 							<option value="3">Aluno</option>
@@ -114,7 +142,6 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 
 						<label for="tit_autor">Titulação:</label><br>
 						<input class="texto" type="text" name="data[author][titration]" id="tit_autor"><br><br>
-
 
 					</form>
 					
@@ -140,10 +167,36 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 				<div class="modal-body">
 				
 					<p>Show a file-select field which allows multiple files:</p>
+					
 					<form action="/action_page.php">
-						<label for="myfile">Select files:</label>
-						<input type="file" id="myfile" name="myfile" multiple><br><br>
+
+						<div class='container'>
+
+							
+							<div class='dropzone'>
+
+							<label for="myfile">Select files:</label>
+							<input type="file" id="file-selector"  name="data[author][attachments]"  accept=".jpg, .jpeg, .png, .svg, .pdf" multiple><br><br>
+
+								<div class='dropzone-list'>
+									<ul>
+									</ul>
+								</div>
+							</div>
+
+
+
+						</div>
+
 					</form>
+
+					<script>
+						const fileSelector = document.getElementById('file-selector');
+						fileSelector.addEventListener('change', (event) => {
+							const fileList = event.target.files;
+							console.log(fileList);
+						});
+					</script>
 					
 				</div>
 				<div class="modal-footer">
