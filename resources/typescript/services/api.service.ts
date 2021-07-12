@@ -40,6 +40,9 @@ export class ApiService extends HttpClientRequest {
   }
 
   postToIntellectualAssetAuthorStore(intellectual_asset_id:number , form: Form): Promise<any>{
+
+    
+    alert(form.getAction());
     
     const form_data:FormData = form.getFormData();
 

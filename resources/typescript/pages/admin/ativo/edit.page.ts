@@ -25,6 +25,7 @@ export class EditPage extends ControllerPage {
   private formBasicInformation:Form;
   private formRegistrationNumber:Form;
   private formAuthor:Form;
+  private formAuthorAttach: Form;
 
   /**
    * Form Tokens IDs
@@ -33,8 +34,9 @@ export class EditPage extends ControllerPage {
   static boxFormRegistrationNumberTokenId:string = 'box-form-registration-number';
   static boxFormAuthorTokenId:string = 'box-form-author';
   static boxFormAuthorModalTokenId:string = 'box-form-author-modal';
-  static boxFormAuthorAttatchTokenId:string = 'box-form-author-attatch-modal';
+  static boxFormAuthorAttachTokenId:string = 'box-form-author-attach-modal';
   static formIdToken:string = 'data[intellectual_assets][id]';
+  
   
   constructor(){
      super();
@@ -61,9 +63,14 @@ export class EditPage extends ControllerPage {
      this.formRegistrationNumberConstruct();
     
     /**
-     * starter flow instruction for handle "Registration Number" Form
+     * starter flow instruction for handle "Registration Authors" Form
      */
      this.formAuthorConstruct();
+
+    /**
+     * starter flow instruction for handle "Registration Attachments Authors" Form
+     */
+    this.formAuthorAttachConstruct();
 
   }
 
@@ -134,10 +141,10 @@ export class EditPage extends ControllerPage {
     const dropArea = document.querySelector('.dropzone');
     const fileSelector = document.querySelector('.dropzone #file-selector');
 
-    console.log(fileSelector);
+    // const formData = new FormData();
+
     fileSelector.addEventListener('change', ( event: any ) => {
       const fileList = event.target.files;
-      console.log(fileList);
       listFiles(fileList);
     });
 
@@ -161,10 +168,17 @@ export class EditPage extends ControllerPage {
       // Read the File objects in this FileList.
       for (var i = 0; i<fileList.length; i++) {
         const f = fileList[i];
+
+        // include into formData
+        // let filename = 'attach_'+i;
+        // formData.append(filename , f);
+        // console.log(filename)
+
         const p = document.createElement('p');
         p.innerHTML = `${f.name} <span>x</span>`;
         ul.appendChild(p);
       }     
+      
       console.log(fileList);
 
     }
@@ -184,7 +198,7 @@ export class EditPage extends ControllerPage {
       .setMethod('post')
       .setAction(`/admin/ativo/${asset_id}/author`)
       .onSubmit( (formData: FormData) => {
-        
+
         const input_id: FormInputValue = this.formBasicInformation.getInputHiddenId() || null;
         if(!input_id){
           alert('Form Registration Number required!');
@@ -224,9 +238,110 @@ export class EditPage extends ControllerPage {
         });
         
       });
-
-    this.modalAttachButtonSave(modal, this.formAuthor);
     
+    /**
+     * Associate formAuthor for call by button save from modal
+     */
+    this.modalAttachButtonSave(modal, this.formAuthor);
+
+  }
+
+  private formAuthorAttachConstruct(): void 
+  {
+
+    const modal:any = document.querySelector(`#${EditPage.boxFormAuthorAttachTokenId}`);
+    const dropArea = document.querySelector('.dropzone');
+    const fileSelector = document.querySelector('.dropzone #file-selector');
+
+    // const formData = new FormData();
+
+    fileSelector.addEventListener('change', ( event: any ) => {
+      const fileList = event.target.files;
+      listFiles(fileList);
+    });
+
+    dropArea.addEventListener('dragover', (event: Event & { dataTransfer?: DataTransfer } ) => {
+      event.stopPropagation();
+      event.preventDefault();
+      // Style the drag-and-drop as a "copy file" operation.
+      event.dataTransfer.dropEffect = 'copy';
+    });
+    
+    dropArea.addEventListener('drop', (event: Event & { dataTransfer?: DataTransfer }) => {
+      event.stopPropagation();
+      event.preventDefault();
+      const fileList:FileList = event.dataTransfer.files;
+      listFiles(fileList);
+    });
+
+    function listFiles(fileList:FileList){
+      
+      const ul = dropArea.querySelector('.dropzone-list ul')
+      // Read the File objects in this FileList.
+      for (var i = 0; i<fileList.length; i++) {
+        const f = fileList[i];
+
+        // include into formData
+        // let filename = 'attach_'+i;
+        // formData.append(filename , f);
+        // console.log(filename)
+
+        const p = document.createElement('p');
+        p.innerHTML = `${f.name} <span>x</span>`;
+        ul.appendChild(p);
+      }     
+      
+      console.log(fileList);
+
+    }
+
+    /**
+     * capture asset_id of formBasicInformation
+     */
+     const asset_id = this.formBasicInformation.getInputHiddenId().value;
+
+    /**
+     * Form for submit attachments from authors
+     */
+    this.formAuthorAttach = new Form( EditPage.boxFormAuthorAttachTokenId );
+
+    this.formAuthorAttach
+    .setMethod('post')
+      .setAction(`/admin/ativo/${asset_id}/author`)
+      .onSubmit( (formData: FormData) => {
+
+        const input_id: FormInputValue = this.formBasicInformation.getInputHiddenId() || null;
+        if(!input_id){
+          alert('Form Registration Number required!');
+          this.formBasicInformation.focusIn('#nome_ativo');
+          return false;
+        }
+
+      /**
+       * Post data to api persister 
+       */
+        this.apiService.postToIntellectualAssetAuthorStore(asset_id,this.formAuthorAttach).then( (result)=>{
+
+          const new_attachments = result;
+      
+          /**
+           * Cleaner form
+           */
+          this.formAuthor.element.reset();
+
+          /**
+           * hide modal
+           */
+          $(modal).modal('hide');
+
+        });
+
+      });
+
+    /**
+     * Associate formAuthorAttach for call by button save from modal
+     */
+     this.modalAttachButtonSave(modal, this.formAuthorAttach);
 
   }
 

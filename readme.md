@@ -9,6 +9,28 @@
 > 
 > **Branch**: [master](https://)
 
+<br>
+
+## Executando apliacação localmente
+
+- Requisitos
+    - PHP (https://www.php.net/manual/en/install.php ou https://linuxize.com/post/how-to-install-php-on-ubuntu-18-04/)
+    - NPM (https://nodejs.org/en/download/ ou https://www.makeuseof.com/install-node-js-npm-windows/)
+    - MySQL (https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-pt)
+    - MySQL Workbench (https://dev.mysql.com/downloads/workbench/)
+
+- Instalar as dependencias do FrontEnd (Node Package Manager necessário)
+    - ```npm install``` 
+- Instalar dependencias do backend (PHP instalado)
+    - ```php composer.phar install```
+- Importar arquivo dump do banco de dados no mysql workbench
+    - abrir workbench e via menu -> server -> data import -> marcar opção "import from self-contained file" no caminho ```./#private/DB/dumps/Dump20210526.sql```
+- Acessar aplicação no navegador 
+    - caminho: ```http://localhost:8000```
+    - login: ```inovuerj@sr2.uerj.br```
+    - senha: ```feudodoinov```
+
+<br>
 
 ## Criação da Aplicação
 

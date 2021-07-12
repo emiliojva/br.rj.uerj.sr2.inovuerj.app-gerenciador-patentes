@@ -81,6 +81,8 @@ export class CreatePage extends ControllerPage {
 
         const input_id: FormInputValue = this.formBasicInformation.getInputHiddenId() || null;
 
+        alert(input_id)
+
         if(!input_id){
           alert('Form Registration Number required!');
           this.formBasicInformation.focusIn('#nome_ativo');

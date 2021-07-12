@@ -8,12 +8,12 @@
 <div class="corpo-poslogin">
   <div id="corpo-poslogin-titulo" class="corpo-poslogin-titulo container">
     <div id="projetos" class="corpo-poslogin-projetos">
-      <button class="corpo-poslogin-titulo-button"><h2>Projetos <img src="./img/icons8-collapse-arrow-24.png"></h2>
+      <button class="corpo-poslogin-titulo-button"><h2>Projetos <img src="./images/icons8-collapse-arrow-24.png"></h2>
       </button>
     </div>
     <div id="ativosintelectuais" class="corpo-poslogin-ativosintelectuais">
       <button class="corpo-poslogin-titulo-button"><h2>Ativos Intelectuais <img
-                  src="./img/icons8-collapse-arrow-24.png"></h2></button>
+                  src="./images/icons8-collapse-arrow-24.png"></h2></button>
     </div>
     <div class="corpo-poslogin-menu" id="corpo-poslogin-menu">
       <ul>
@@ -49,5 +49,3 @@
     </div>
   </div>
 </div>
-
-<script src="js/poslogin.js"></script>

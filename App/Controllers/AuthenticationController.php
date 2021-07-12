@@ -61,7 +61,7 @@ class AuthenticationController extends ControllerAction
      * Abre uma conexao db e executa o comando begin do banco de dados escolhido (ex: mysql)
      */
     // TTransaction::open();
-    TDatabase::beginTransaction();
+    TDatabase::begin();
 
     /**
      * Instancia de um objeto usuario

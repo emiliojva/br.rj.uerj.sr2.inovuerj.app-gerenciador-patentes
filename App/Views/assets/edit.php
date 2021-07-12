@@ -157,7 +157,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 	</div>
 
 	<!-- Modal anexos-->
-	<div class="modal fade" id="box-form-author-attatch-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="box-form-author-attach-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -171,37 +171,27 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 					<form action="/action_page.php">
 
 						<div class='container'>
-
 							
 							<div class='dropzone'>
 
-							<label for="myfile">Select files:</label>
-							<input type="file" id="file-selector"  name="data[author][attachments]"  accept=".jpg, .jpeg, .png, .svg, .pdf" multiple><br><br>
+								<label for="myfile">Select files:</label>
+								<input type="file" id="file-selector"  name="data[author][attachments]"  accept=".jpg, .jpeg, .png, .svg, .pdf" multiple><br><br>
 
 								<div class='dropzone-list'>
 									<ul>
 									</ul>
 								</div>
+
 							</div>
-
-
 
 						</div>
 
 					</form>
-
-					<script>
-						const fileSelector = document.getElementById('file-selector');
-						fileSelector.addEventListener('change', (event) => {
-							const fileList = event.target.files;
-							console.log(fileList);
-						});
-					</script>
 					
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="menu" data-bs-dismiss="modal">Cancelar</button>
-					<button class="menu">Salvar</button>
+						<button type="button" class="menu" data-bs-dismiss="modal">Cancelar</button>
+					<button class="menu button-save">Salvar</button>
 					<!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
 					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 				</div>
@@ -210,7 +200,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 	</div>
 
 	<button class="botao_2" id="add-author" type="button" data-bs-toggle="modal" data-bs-target="#box-form-author-modal">Adicionar Autor</button><br>
-	<button class="botao_2" id="add-author-attachment" type="button" data-bs-toggle="modal" data-bs-target="#box-form-author-attatch-modal">Inserir Anexos</button><br>
+	<button class="botao_2" id="add-author-attachment" type="button" data-bs-toggle="modal" data-bs-target="#box-form-author-attach-modal">Inserir Anexos</button><br>
 
 </div>
 
