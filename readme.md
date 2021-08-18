@@ -25,6 +25,8 @@
     - ```php composer.phar install```
 - Importar arquivo dump do banco de dados no mysql workbench
     - abrir workbench e via menu -> server -> data import -> marcar opção "import from self-contained file" no caminho ```./#private/DB/dumps/Dump20210526.sql```
+- Executar o projeto
+    - ```npm run dev```
 - Acessar aplicação no navegador 
     - caminho: ```http://localhost:8000```
     - login: ```inovuerj@sr2.uerj.br```
