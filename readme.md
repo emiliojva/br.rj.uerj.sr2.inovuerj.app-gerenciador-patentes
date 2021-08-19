@@ -25,6 +25,11 @@
     - ```php composer.phar install```
 - Importar arquivo dump do banco de dados no mysql workbench
     - abrir workbench e via menu -> server -> data import -> marcar opção "import from self-contained file" no caminho ```./#private/DB/dumps/Dump20210526.sql```
+- Criar um arquivo ```.env```. 
+    - Ctrl + C e Ctrl V no .env.example
+    - Alterar variaveis de banco para as definidas localmente
+        - DB_USERNAME=root
+        - DB_PASSWORD=root
 - Executar o projeto
     - ```npm run dev```
 - Acessar aplicação no navegador 
