@@ -27,7 +27,7 @@
     <!-- Footer -->
     <div class="footer">
       <div class="footer-div1">
-        <h1>Projeto Novo</h1>
+        <h1>SGIN - Sistema de Gestão da Inovação</h1>
         <p>Tels.: 2334-0017/ 2334-0018 - inovuerj@sr2.uerj.br</p>
         <a href="#">Universidade do Estado do Rio de Janeiro</a>
         <p>Rua São Francisco Xavier, 524 - Maracanã - Prédio anexo - Térreo</p>

@@ -11,7 +11,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 			<h2>Informações Básicas</h2>
 			<form>
 
-				<input type="hidden" id="intellectual_asset_id" name="data[intellectual_assets][id]"><br><br>
+				<input type="hidden" id="intellectual_asset_id" name="data[intellectual_assets][id]">
 
 				<label for="nome_ativo">Nome do Ativo:</label><br>
 				<input class="texto" type="text" id="nome_ativo" name="data[intellectual_assets][name]"><br><br>
@@ -33,17 +33,17 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 			</form>
 		</div>
 		<div class="num_reg caixa grid-16" id="box-form-registration-number">
-			<h2>Numero de Registro</h2>
+			<h2>Número de Registro</h2>
 			<form>
 
 				<section class='control'>
-					<label for="numero">Numero:</label><br>
+					<label for="numero">Número:</label><br>
 					<input class="texto" type="text" name="data[intellectual_assets][registration_number]" id="numero" required><br><br>
 				</section>
 
 				<section class='control'>
 					
-					<label>Agencia de Proteção:</label><br><br>
+					<label>Agência de Proteção:</label><br><br>
 
 					<input class="radio" type="radio" name="data[intellectual_assets][protection_agency_inpi]" value="inpi">
 					<label class="radio_label" for="inpi">INPI</label>
@@ -88,10 +88,10 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 				<label for="ua_autor">Unidade Academica:</label><br>
 				<input class="texto" type="text" name="ua_autor" id="ua_autor"><br><br>
 
-				<label for="mat_autor">Matricula:</label><br>
+				<label for="mat_autor">Matrícula:</label><br>
 				<input class="texto" type="number" name="mat_autor" id="mat_autor"><br><br>
 
-				<label>Tipo de Vinculo:</label><br>
+				<label>Tipo de Vínculo:</label><br>
 				<select>
 					<option value="serv_docente">Servidor Docente</option>
 					<option value="serv_tecnico">Servidor Técnico</option>
@@ -147,7 +147,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 			<h2>Guias de Pagamento</h2>
 			<div class="caixa interna grid-16">
 				<form>
-					<label for="num_pag">Numero:</label><br>
+					<label for="num_pag">Número:</label><br>
 					<input class="texto" type="number" name="num_pag" id="num_pag"><br><br>
 
 					<label for="data_pag">Data de Pagamento/Vencimento:</label><br>

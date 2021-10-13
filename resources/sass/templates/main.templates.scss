@@ -121,6 +121,11 @@
   padding: 10px 0px 10px 0px;
   cursor: pointer;
 }
+@media only screen and (max-width: 767px) {
+  .corpo-poslogin-titulo-button {
+    width: 300px;
+  }
+}
 .corpo-poslogin-titulo img{
   width: auto;
   height: 10px;
@@ -163,9 +168,21 @@
   width: 1%;
 }
 .corpo-poslogin-conteudo-parte3{
-  display: inline-block;
+  // display: inline-block;
   width: 77%;
-  margin-left: 45px;
+  float: right;
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .corpo-poslogin-conteudo-parte3 {
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .corpo-poslogin-conteudo-parte3 {
+    float: none;
+    width: 100%;
+    margin-top: 40px;
+  }
 }
 .corpo-poslogin-conteudo-novo h3{
   font-family: Arial, Helvetica, sans-serif;
@@ -185,6 +202,16 @@
 .corpo-poslogin-conteudo-checkbox{
   margin-top: 10px;
 }
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .corpo-poslogin-conteudo-checkbox {
+    width: 120px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .corpo-poslogin-conteudo-checkbox {
+    width: 200px;
+  }
+}
 .corpo-poslogin-conteudo-checkbox label{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -192,9 +219,19 @@
 }
 .corpo-poslogin-conteudo-parte2{
   width: 2px;
-  height: 111px;
+  height: 124px;
   background-color: #8b0000;
-  margin: 0px 6px 0px 6px;
+  margin-left: 12px;
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .corpo-poslogin-conteudo-parte2 {
+    margin-left: 60px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .corpo-poslogin-conteudo-parte2 {
+    width: 0;
+  }
 }
 .corpo-poslogin-conteudo-parte3-buscar{
   font-family: Arial, Helvetica, sans-serif;
@@ -211,7 +248,7 @@
   border: 0px;
   border-bottom: 1px solid;
   height: 30px;
-  width: 100%;
+  width: 75%;
   margin-bottom: 40px;
 }
 #novoativo{
@@ -268,6 +305,14 @@ label{
   margin-left: 90px;
 }
 
+@media only screen and (max-width: 767px) {
+  .menu {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 70px;
+  }
+}
+
 .final{
   color: #fff;
   text-align: center;
@@ -279,8 +324,23 @@ label{
   cursor: pointer;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-right: -20px;
-  margin-left: 220px;
+  margin-right: -40px;
+  margin-left: 230px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .final {
+    margin-left: 130px;
+    margin-right: 60px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .final {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 70px;
+  }
 }
 
 .caixa{
@@ -292,7 +352,20 @@ label{
 }
 
 .interna{
-  width: 915px;
+  width: 918px;
+  padding-top: 40px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .interna {
+    width: 727px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .interna {
+    width: 298px;
+  }
 }
 
 .caixa-botao{
@@ -311,7 +384,7 @@ label{
   width: 250px;
   padding: 10px 0px 10px 0px;
   cursor: pointer;
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
 
 .botao_2{
@@ -331,13 +404,14 @@ label{
 }
 
 .radio {
-box-sizing: border-box;
-appearance: none;
-background: white;
-outline: 2px solid #333;
-border: 3px solid white;
-width: 10px;
-height: 10px;
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 10px;
+  height: 10px;
+  margin-left: 16px;
 }
 
 .radio:checked {
@@ -345,7 +419,7 @@ background: #333;
 }
 
 .radio_label{
-  margin-right: 30px;
+  margin-right: 20px;
 }
 /* Footer */
 
