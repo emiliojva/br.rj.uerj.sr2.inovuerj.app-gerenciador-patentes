@@ -2,7 +2,7 @@
 <?php $this->layout('main.template', ['title' => 'Administrativo']) ?>
 
 <!-- Header -->
-<h2>Olá, <?php echo $usuario_autenticado['email']; ?></h2>
+<h2 class="container">Olá, <?php echo $usuario_autenticado['email']; ?></h2>
 
 <!-- Conteúdo -->
 <div class="corpo-poslogin">

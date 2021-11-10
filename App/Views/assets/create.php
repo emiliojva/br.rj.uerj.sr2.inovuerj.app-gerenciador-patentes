@@ -181,7 +181,7 @@ $this->layout('main.template', ['title' => 'Administrativo - Cadastro de Ativo']
 			<button class="menu">Cancelar</button>
 			<button class="menu">Salvar</button>
 		</div>
-		<button class="final">Cancelar</button>
+		<button class="final" onClick="location.href='/admin';">Cancelar</button>
 		<button class="final">Salvar</button>
 
 

@@ -28,10 +28,7 @@
     <div class="footer">
       <div class="footer-div1">
         <h1>SGIN - Sistema de Gestão da Inovação</h1>
-        <p>Tels.: 2334-0017/ 2334-0018 - inovuerj@sr2.uerj.br</p>
-        <a href="#">Universidade do Estado do Rio de Janeiro</a>
-        <p>Rua São Francisco Xavier, 524 - Maracanã - Prédio anexo - Térreo</p>
-        <p>CNPJ: 33.540.014/0001-57 - Inscrição estadual: 76003939 - Inscrição municipal: 0.189.106-5</p>
+        <a href="https://www.uerj.br/">Universidade do Estado do Rio de Janeiro</a>
       </div>
       <div class="footer-div2">
         <p>Copyright © INOVUERJ 2020</p>
